@@ -8,7 +8,8 @@ include_directories(include)
 set(SOURCE_FILES
         src/main.cpp
         include/IComponent.hpp
-        include/ILink.hpp
-        include/IPin.hpp)
+        include/IPin.hpp
+        src/pin/PinComponent.cpp
+        include/pin/PinComponent.hpp)
 
 add_executable(nanotekspice ${SOURCE_FILES})

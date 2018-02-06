@@ -10,8 +10,7 @@
 
 #include <cstdio>
 
-namespace nts
-{
+namespace nts {
 	enum Tristate {
 		UNDEFINED = (-true),
 		TRUE = true,

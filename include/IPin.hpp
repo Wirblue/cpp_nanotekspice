@@ -8,19 +8,23 @@
 #ifndef CPP_NANOTEKSPICE_IPIN_HPP
 #define CPP_NANOTEKSPICE_IPIN_HPP
 
+#include "IComponent.hpp"
+
 namespace nts {
-	class IComponent;
-	class IPin;
-	enum Tristate;
+	enum PinType {
+		IN,
+		OUT,
+		NONE
+	};
 
 	class IPin {
 	public:
 		virtual ~IPin() = default;
-		virtual nts::Tristate compute() = 0;
-		virtual void dump() const = 0;
-		virtual void setLink(IPin &other) = 0;
-		virtual nts::IPin &getLink() const = 0;
-		virtual std::string &getName() const = 0;
+		virtual Tristate compute() = 0;
+		virtual bool link(IPin *pin) = 0;
+		virtual void dump() = 0;
+		virtual PinType getType() = 0;
+		virtual PinType getLoc() = 0;
 	};
 }
 

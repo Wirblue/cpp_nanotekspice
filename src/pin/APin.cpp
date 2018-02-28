@@ -15,18 +15,32 @@ nts::APin::APin()
 
 nts::APin::~APin()
 {
-	if (_link)
-		_link->link(nullptr);
 }
 
 void nts::APin::dump() const
 {
-	std::cout << getStatus() << std::endl;
+	std::cout << getStatus() << " " << this << " to " << _link << std::endl;
 }
 
-bool nts::APin::link(IPin *pin)
+bool nts::APin::link(IPin *pin, bool inComponent)
 {
-	_link = pin;
+	if (inComponent) {
+		_link = pin;
+		return true;
+	}
+	if (!pin) {
+		std::cerr << "Can't link to null !" << std::endl;
+		return false;
+	}
+
+	if (isLinkable(pin) && !_link)
+		_link = pin;
+	else if (pin->isLinkable(this))
+		return pin->link(this, false);
+	else {
+		std::cout << "Invalid Connection" << std::endl;
+		return false;
+	}
 	return true;
 }
 
@@ -38,4 +52,17 @@ void nts::APin::setStatus(Tristate status)
 nts::IPin *nts::APin::getLink() const
 {
 	return _link;
+}
+
+bool nts::APin::isLinkable(IPin *link) const
+{
+	if (!link)
+		return false;
+
+	if (getLoc() == nts::OUT && getType() == nts::IN) {
+		return false;
+	}
+	bool a2 = getType() == link->getType();
+	bool a1 = getLoc() == link->getLoc();
+	return (a1 ^ a2);
 }

@@ -30,7 +30,7 @@ void nts::AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size
 {
 	if (pin > _nbPin || otherPin > _nbPin)
 		return;
-	_pin[pin]->link(other.getPin(otherPin));
+	_pin[pin]->link(other.getPin(otherPin), false);
 }
 
 void nts::AComponent::dump() const

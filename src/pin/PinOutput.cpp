@@ -26,5 +26,5 @@ nts::Tristate nts::PinOutput::getStatus() const
 
 nts::PinType nts::PinOutput::getType() const
 {
-	return IN;
+	return OUT;
 }

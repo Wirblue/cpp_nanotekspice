@@ -24,5 +24,5 @@ void nts::PinInput::setStatus(nts::Tristate status)
 
 nts::PinType nts::PinInput::getType() const
 {
-	return OUT;
+	return IN;
 }

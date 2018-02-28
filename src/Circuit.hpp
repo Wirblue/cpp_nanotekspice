@@ -28,8 +28,27 @@ namespace nts {
 		bool addComponent(std::string name, std::string type);
 		bool addOutput(std::string name);
 
+		bool linkComponent(std::string name1, size_t pin1,
+			std::string name2, size_t pin2);
+
+		void dumpComponent();
+
 	private:
-		bool parseChipsets(std::string name, std::string type);
+
+		enum readType {
+			NONE,
+			CHIPSETS,
+			LINKS
+		};
+
+		bool parseChipsets(std::string a, std::string b);
+		bool parseLinks(std::string a, std::string b);
+
+		bool readDefault(std::ifstream &file, readType &status);
+		bool readChiptsets(std::ifstream &file, readType &status);
+		bool readLinks(std::ifstream &file, readType &status);
+
+		IPin *findPin(std::string name, size_t pos);
 
 		std::map<std::string, PinInput *> _input;
 		std::map<std::string, IComponent *> _component;

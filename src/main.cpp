@@ -18,11 +18,12 @@
 #include "components/gates/ComponentXNOR.hpp"
 #include "Circuit.hpp"
 
-int main()
+int main(int ac, char **av)
 {
 	nts::Circuit circuit;
 
-	circuit.addOutput("aled");
-	circuit.addOutput("aled2");
-	circuit.addOutput("aled");
+	bool aled = circuit.createCircuitFromFile(av[1]);
+	if (aled)
+		circuit.dumpComponent();
+	return aled;
 }

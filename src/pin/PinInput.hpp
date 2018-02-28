@@ -16,10 +16,10 @@ namespace nts {
 	public:
 		PinInput(std::string name, Tristate status = UNDEFINED);
 
-		virtual Tristate compute() override;
+		virtual Tristate getStatus() const override;
 		void setStatus(Tristate);
 
-		virtual PinType getType() override;
+		virtual PinType getType() const override;
 
 	private:
 		Tristate _status;

@@ -8,6 +8,12 @@
 #include "APinComponent.hpp"
 
 nts::APinComponent::APinComponent(IComponent *gate):
-	_gate(gate)
+	_component(gate)
 {
+	_status = UNDEFINED;
+}
+
+nts::PinType nts::APinComponent::getLoc() const
+{
+	return IN;
 }

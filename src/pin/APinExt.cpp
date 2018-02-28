@@ -26,7 +26,7 @@ std::string &nts::APinExt::getName()
 	return _name;
 }
 
-nts::PinType nts::APinExt::getLoc()
+nts::PinType nts::APinExt::getLoc() const
 {
 	return OUT;
 }

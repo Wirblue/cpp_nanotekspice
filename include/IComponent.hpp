@@ -17,6 +17,8 @@ namespace nts {
 		FALSE = false
 	};
 
+	class IPin;
+
 	class IComponent
 	{
 	public:
@@ -24,10 +26,18 @@ namespace nts {
 	public:
 		virtual Tristate compute(std::size_t pin = 1) = 0;
 		virtual void setLink(std::size_t pin,
-		                     IComponent &other,
-		                     std::size_t otherPin) = 0;
+			IComponent &other,
+			std::size_t otherPin) = 0;
+
 		virtual void dump() const = 0;
+		virtual void execute() = 0;
+		virtual IPin *getPin(size_t pos) const = 0;
 	};
 }
+
+nts::Tristate operator!(nts::Tristate const &a);
+nts::Tristate operator|(nts::Tristate const &a, nts::Tristate const &b);
+nts::Tristate operator&(nts::Tristate const &a, nts::Tristate const &b);
+nts::Tristate operator^(nts::Tristate const &a, nts::Tristate const &b);
 
 #endif /* CPP_NANOTEKSPICE_ICOMPONENT_HPP */

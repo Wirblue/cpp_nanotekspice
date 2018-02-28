@@ -13,11 +13,11 @@
 namespace nts {
 	class PinComponentIn : public APinComponent {
 	public:
-		PinComponentIn(IComponent *gate = nullptr);
+		PinComponentIn(IComponent *component = nullptr);
 		~PinComponentIn();
 
-		virtual Tristate compute() override;
-		virtual PinType getType() override;
+		virtual Tristate getStatus() const override;
+		virtual PinType getType() const override;
 	};
 }
 

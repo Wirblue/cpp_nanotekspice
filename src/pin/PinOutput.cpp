@@ -17,14 +17,14 @@ nts::PinOutput::~PinOutput()
 {
 }
 
-nts::Tristate nts::PinOutput::compute()
+nts::Tristate nts::PinOutput::getStatus() const
 {
 	if (!this->_link)
 		return UNDEFINED;
-	return this->_link->compute();
+	return this->_link->getStatus();
 }
 
-nts::PinType nts::PinOutput::getType()
+nts::PinType nts::PinOutput::getType() const
 {
-	return OUT;
+	return IN;
 }

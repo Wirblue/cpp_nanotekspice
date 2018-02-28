@@ -20,7 +20,7 @@ namespace nts {
 		void setName(std::string name);
 		std::string &getName();
 
-		virtual PinType getLoc() override;
+		virtual PinType getLoc() const override;
 
 	protected:
 		std::string &_name;

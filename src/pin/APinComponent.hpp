@@ -15,8 +15,10 @@ namespace nts {
 	public:
 		APinComponent(IComponent *gate = nullptr);
 
+		virtual PinType getLoc() const override;
+
 	protected:
-		IComponent *_gate;
+		IComponent *_component;
 	};
 }
 

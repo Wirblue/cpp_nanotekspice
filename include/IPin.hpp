@@ -20,11 +20,15 @@ namespace nts {
 	class IPin {
 	public:
 		virtual ~IPin() = default;
-		virtual Tristate compute() = 0;
 		virtual bool link(IPin *pin) = 0;
-		virtual void dump() = 0;
-		virtual PinType getType() = 0;
-		virtual PinType getLoc() = 0;
+		virtual void dump() const = 0;
+
+		virtual nts::Tristate getStatus() const = 0;
+		virtual PinType getType() const = 0;
+		virtual PinType getLoc() const = 0;
+		virtual IPin *getLink() const = 0;
+
+		virtual void setStatus(nts::Tristate status) = 0;
 	};
 }
 

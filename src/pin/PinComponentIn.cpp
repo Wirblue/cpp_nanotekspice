@@ -7,8 +7,8 @@
 
 #include "PinComponentIn.hpp"
 
-nts::PinComponentIn::PinComponentIn(nts::IComponent *gate):
-	APinComponent(gate)
+nts::PinComponentIn::PinComponentIn(nts::IComponent *component):
+	APinComponent(component)
 {
 
 }
@@ -17,14 +17,14 @@ nts::PinComponentIn::~PinComponentIn()
 {
 }
 
-nts::Tristate nts::PinComponentIn::compute()
+nts::Tristate nts::PinComponentIn::getStatus() const
 {
 	if (!_link)
 		return UNDEFINED;
-	return _link->compute();
+	return _link->getStatus();
 }
 
-nts::PinType nts::PinComponentIn::getType()
+nts::PinType nts::PinComponentIn::getType() const
 {
 	return IN;
 }

@@ -16,12 +16,18 @@ namespace nts {
 		APin();
 		~APin() override;
 
-		virtual Tristate compute() = 0;
 		virtual bool link(IPin *pin) override;
-		virtual void dump() override;
+		virtual void dump() const override;
+		virtual void setStatus(Tristate status) override;
+		virtual Tristate getStatus() const override = 0;
+		virtual PinType getType() const override = 0;
+		virtual PinType getLoc() const override = 0;
+
+		virtual IPin *getLink() const override;
 
 	protected:
 		IPin *_link;
+		Tristate _status;
 	};
 }
 

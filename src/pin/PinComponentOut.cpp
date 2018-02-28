@@ -7,24 +7,25 @@
 
 #include "PinComponentOut.hpp"
 
-nts::PinComponentOut::PinComponentOut(nts::IComponent *gate):
-	APinComponent(gate)
+nts::PinComponentOut::PinComponentOut(nts::IComponent *component):
+	APinComponent(component)
 {
-
 }
 
 nts::PinComponentOut::~PinComponentOut()
 {
 }
 
-nts::Tristate nts::PinComponentOut::compute()
+nts::Tristate nts::PinComponentOut::getStatus() const
 {
-	if (_lastCall == UNDEFINED)
-		_lastCall = _gate->compute();
-	return _lastCall;
+	if (_component)
+		_component->execute();
+	if (_link)
+		return _link->getStatus();
+	return _status;
 }
 
-nts::PinType nts::PinComponentOut::getType()
+nts::PinType nts::PinComponentOut::getType() const
 {
 	return OUT;
 }

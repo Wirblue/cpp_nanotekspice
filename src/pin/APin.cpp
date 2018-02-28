@@ -19,15 +19,23 @@ nts::APin::~APin()
 		_link->link(nullptr);
 }
 
-void nts::APin::dump()
+void nts::APin::dump() const
 {
-	std::cout << compute() << std::endl;
+	std::cout << getStatus() << std::endl;
 }
 
 bool nts::APin::link(IPin *pin)
 {
-	if (_link != nullptr || this->getType() == pin->getType())
-		return false;
 	_link = pin;
 	return true;
+}
+
+void nts::APin::setStatus(Tristate status)
+{
+	_status = status;
+}
+
+nts::IPin *nts::APin::getLink() const
+{
+	return _link;
 }

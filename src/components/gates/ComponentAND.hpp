@@ -17,7 +17,6 @@ namespace nts {
 		virtual ~ComponentAND();
 
 		virtual void execute() override;
-
 		virtual nts::IComponent *clone(std::string name) const override;
 
 	};

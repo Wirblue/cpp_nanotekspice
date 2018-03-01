@@ -23,14 +23,14 @@ bool nts::Circuit::alreadyExist(std::string name)
 
 	return (_output.find(name.c_str()) != _output.end()
 		|| _input.find(name.c_str()) != _input.end()
-		|| _component.find(name.c_str()) != _component.end());
+		|| _component.find(name.c_str()) != _component.end()
+		|| _clock.find(name.c_str()) != _clock.end());
 }
 
 bool nts::Circuit::addOutput(std::string name)
 {
 	PinOutput *newOutput = new PinOutput(name);
 
-	//printf("ADD OUTPUT %10s %p\n", name.c_str(), newOutput);
 	if (alreadyExist(name)) {
 		std::cerr << "output '" << name << "' already exist" << std::endl;
 		return false;
@@ -43,12 +43,24 @@ bool nts::Circuit::addInput(std::string name)
 {
 	PinInput *newInput = new PinInput(name);
 
-	//printf("ADD INPUT  %10s %p\n", name.c_str(), newInput);
 	if (alreadyExist(name)) {
 		std::cerr << "input '" << name << "' already exist" << std::endl;
 		return false;
 	}
 	_input.insert(std::make_pair(name, newInput));
+	return true;
+}
+
+bool nts::Circuit::addClock(std::string name)
+{
+	PinInput *newClock = new PinInput(name);
+
+	//printf("ADD INPUT  %10s %p\n", name.c_str(), newInput);
+	if (alreadyExist(name)) {
+		std::cerr << "clock '" << name << "' already exist" << std::endl;
+		return false;
+	}
+	_input.insert(std::make_pair(name, newClock));
 	return true;
 }
 
@@ -77,6 +89,8 @@ bool nts::Circuit::parseChipsets(std::string a, std::string b)
 		status = addInput(a);
 	else if (b == "output")
 		status = addOutput(a);
+	else if (b == "clock")
+		status = addClock(a);
 	else
 		status = addComponent(a, b);
 	return status;
@@ -92,6 +106,7 @@ nts::IPin *nts::Circuit::findPin(std::string name, size_t pos)
 	} else if (_component.find(name.c_str()) != _component.end()) {
 		return _component[name]->getPin(pos);
 	}
+	std::cerr << "'" << name << "' isn't a component !" << std::endl;
 	return (nullptr);
 }
 
@@ -198,6 +213,9 @@ void nts::Circuit::dumpComponent()
 {
 	for (auto const& p : _input) {
 		p.second->setStatus(FALSE);
+	}
+	for (auto const& p : _clock) {
+		p.second->setStatus(TRUE);
 	}
 	for (auto const& p : _output) {
 		p.second->dump();

@@ -24,27 +24,22 @@ namespace nts {
 		Circuit();
 		~Circuit();
 
-		bool createCircuitFromFile(std::string file);
 		bool addInput(std::string name);
 		bool addClock(std::string name);
 		bool addComponent(std::string name, std::string type);
 		bool addOutput(std::string name);
+
 		bool linkComponent(std::string name1, size_t pin1, std::string name2, size_t pin2);
-		void dumpComponent();
+
+		void dump();
+		void simulate();
+		void display();
+		bool setInput(std::string name, nts::Tristate status);
 
 	private:
-		enum readType {
-			NONE,
-			CHIPSETS,
-			LINKS
-		};
-		bool parseChipsets(std::string a, std::string b);
-		bool parseLinks(std::string a, std::string b);
-		bool readDefault(std::ifstream &file, readType &status);
-		bool readChiptsets(std::ifstream &file, readType &status);
-		bool readLinks(std::ifstream &file, readType &status);
 		bool alreadyExist(std::string name);
 		IPin *findPin(std::string name, size_t pos);
+		void moveClocks();
 
 		std::map<std::string, PinInput *> _input;
 		std::map<std::string, PinInput *> _clock;

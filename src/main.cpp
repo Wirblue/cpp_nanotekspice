@@ -17,14 +17,15 @@
 #include "components/gates/ComponentXOR.hpp"
 #include "components/gates/ComponentXNOR.hpp"
 #include "Circuit.hpp"
+#include "Parser.hpp"
 
-int main(int ac, char **av)
+int main(int ac[[maybe_unused]], char **av)
 {
-	nts::Circuit circuit;
+	nts::Parser parser;
 
-	bool aled = circuit.createCircuitFromFile(av[1]);
-	if (!aled)
-		return 84;
-	circuit.dumpComponent();
+	if (!parser.createCircuitFromFile(av[1]))
+		return false;
+	nts::Circuit &circuit = parser.getCircuit();
+	circuit.display();
 	return 0;
 }

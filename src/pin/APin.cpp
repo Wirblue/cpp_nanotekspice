@@ -19,7 +19,7 @@ nts::APin::~APin()
 
 void nts::APin::dump() const
 {
-	std::cout << getStatus() << std::endl;
+	std::cout << getStatus() << " - " << this << " ==> " << _link << std::endl;
 }
 
 bool nts::APin::link(IPin *pin, bool inComponent)

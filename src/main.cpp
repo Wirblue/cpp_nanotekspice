@@ -18,6 +18,7 @@
 #include "components/gates/ComponentXNOR.hpp"
 #include "Circuit.hpp"
 #include "Parser.hpp"
+#include "InGame.hpp"
 
 int main(int ac[[maybe_unused]], char **av)
 {
@@ -26,6 +27,7 @@ int main(int ac[[maybe_unused]], char **av)
 	if (!parser.createCircuitFromFile(av[1]))
 		return false;
 	nts::Circuit &circuit = parser.getCircuit();
-	circuit.display();
+	nts::InGame game(circuit);
+	game.start();
 	return 0;
 }

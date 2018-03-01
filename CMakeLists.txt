@@ -34,7 +34,26 @@ set(SOURCE_FILES
         src/components/Component4Gate.cpp
         src/components/Component4Gate.hpp
         src/components/gates/ComponentNOT.cpp
-        src/components/gates/ComponentNOT.hpp src/components/gates/ComponentNAND.cpp src/components/gates/ComponentNAND.hpp src/components/gates/ComponentNOR.cpp src/components/gates/ComponentNOR.hpp src/components/gates/ComponentXOR.cpp src/components/gates/ComponentXOR.hpp src/components/gates/ComponentXNOR.cpp src/components/gates/ComponentXNOR.hpp src/Circuit.cpp src/Circuit.hpp src/componentList.cpp src/components/singleComponents/ComponentTrue.cpp src/components/singleComponents/ComponentTrue.hpp src/components/singleComponents/ComponentFalse.cpp src/components/singleComponents/ComponentFalse.hpp src/Parser.cpp src/Parser.hpp src/Exception/NtsException.cpp src/Exception/NtsException.hpp)
+        src/components/gates/ComponentNOT.hpp
+        src/components/gates/ComponentNAND.cpp
+        src/components/gates/ComponentNAND.hpp
+        src/components/gates/ComponentNOR.cpp
+        src/components/gates/ComponentNOR.hpp
+        src/components/gates/ComponentXOR.cpp
+        src/components/gates/ComponentXOR.hpp
+        src/components/gates/ComponentXNOR.cpp
+        src/components/gates/ComponentXNOR.hpp
+        src/Circuit.cpp
+        src/Circuit.hpp
+        src/componentList.cpp
+        src/components/singleComponents/ComponentTrue.cpp
+        src/components/singleComponents/ComponentTrue.hpp
+        src/components/singleComponents/ComponentFalse.cpp
+        src/components/singleComponents/ComponentFalse.hpp
+        src/Parser.cpp
+        src/Parser.hpp
+        src/Exception/NtsException.cpp
+        src/Exception/NtsException.hpp src/InGame.cpp src/InGame.hpp)
 
 add_executable(nanotekspice
         src/main.cpp

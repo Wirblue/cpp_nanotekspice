@@ -45,3 +45,16 @@ nts::Tristate operator^(nts::Tristate const &a, nts::Tristate const &b)
 	else
 		return nts::FALSE;
 }
+
+std::ostream &operator<<(std::ostream &os, nts::Tristate const &a)
+{
+	switch (a) {
+	case nts::TRUE:
+		return os << std::string("1");
+	case nts::FALSE:
+		return os << std::string("0");
+	case nts::UNDEFINED:
+		return os << std::string("U");
+	}
+	return os;
+}

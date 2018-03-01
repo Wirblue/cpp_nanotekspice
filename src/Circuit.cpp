@@ -120,8 +120,12 @@ void nts::Circuit::simulate()
 
 void nts::Circuit::display()
 {
+	for (auto const& p : _input) {
+		std::cout << p.first << "=";
+		p.second->dump();
+	}
 	for (auto const& p : _output) {
-		std::cout << p.first << ": ";
+		std::cout << p.first << "=";
 		p.second->dump();
 	}
 }

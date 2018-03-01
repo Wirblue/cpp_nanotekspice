@@ -2,12 +2,13 @@
 // EPITECH PROJECT, 2018
 // cpp_nanotekspice
 // File description:
-// Component4081.cpp
+// Component4Gate.cpp
 //
 
-#include "Component4081.hpp"
+#include "Component4Gate.hpp"
 
-nts::Component4081::Component4081(std::string name):
+template <typename T>
+nts::Component4Gate<T>::Component4Gate(std::string name):
 	AComponent(name, 14)
 {
 	_pin.push_back(new PinComponentIn(this));
@@ -24,7 +25,6 @@ nts::Component4081::Component4081(std::string name):
 	_pin.push_back(new PinComponentIn(this));
 	_pin.push_back(new PinComponentIn(this));
 	_pin.push_back(new PinComponentOut(this));
-
 	_andGates[0].getPin(0)->link(_pin[0], true);
 	_andGates[0].getPin(1)->link(_pin[1], true);
 	_pin[2]->link(_andGates[0].getPin(2), true);
@@ -39,13 +39,25 @@ nts::Component4081::Component4081(std::string name):
 	_pin[10]->link(_andGates[3].getPin(2), true);
 }
 
-nts::Component4081::~Component4081()
+template<typename T>
+nts::Component4Gate<T>::~Component4Gate()
 {
-
 }
 
-void nts::Component4081::execute()
+template<typename T>
+nts::IComponent *nts::Component4Gate<T>::clone(std::string name) const
+{
+	return new nts::Component4Gate<T>(name);
+}
+
+template<typename T>
+void nts::Component4Gate<T>::execute()
 {
 	for (int i = 0; i < 0; i++)
 		_andGates[i].execute();
 }
+template class nts::Component4Gate<nts::ComponentNOR>;
+template class nts::Component4Gate<nts::ComponentNAND>;
+template class nts::Component4Gate<nts::ComponentXOR>;
+template class nts::Component4Gate<nts::ComponentOR>;
+template class nts::Component4Gate<nts::ComponentAND>;

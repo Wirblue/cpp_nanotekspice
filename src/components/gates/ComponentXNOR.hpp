@@ -17,6 +17,8 @@ namespace nts {
 		virtual ~ComponentXNOR();
 
 		virtual void execute() override;
+
+		virtual IComponent *clone(std::string name) const override;
 	};
 }
 

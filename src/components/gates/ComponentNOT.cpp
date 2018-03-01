@@ -18,6 +18,11 @@ nts::ComponentNOT::~ComponentNOT()
 {
 }
 
+nts::IComponent *nts::ComponentNOT::clone(std::string name) const
+{
+	return new ComponentNOT(name);
+}
+
 void nts::ComponentNOT::execute()
 {
 	nts::Tristate intput = _pin[0]->getStatus();

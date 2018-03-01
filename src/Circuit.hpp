@@ -17,6 +17,8 @@
 #include "pin/PinOutput.hpp"
 
 namespace nts {
+	extern std::map<std::string, IComponent *> componentList;
+
 	class Circuit {
 	public:
 		Circuit();
@@ -47,6 +49,8 @@ namespace nts {
 		bool readDefault(std::ifstream &file, readType &status);
 		bool readChiptsets(std::ifstream &file, readType &status);
 		bool readLinks(std::ifstream &file, readType &status);
+
+		bool alreadyExist(std::string name);
 
 		IPin *findPin(std::string name, size_t pos);
 

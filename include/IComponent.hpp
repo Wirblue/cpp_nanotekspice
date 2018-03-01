@@ -8,7 +8,7 @@
 #ifndef CPP_NANOTEKSPICE_ICOMPONENT_HPP
 #define CPP_NANOTEKSPICE_ICOMPONENT_HPP
 
-#include <cstring>
+#include <string>
 
 namespace nts {
 	enum Tristate {
@@ -23,12 +23,12 @@ namespace nts {
 	{
 	public:
 		virtual ~IComponent() = default;
-	public:
+
+		virtual IComponent *clone(std::string name) const = 0;
 		virtual Tristate compute(std::size_t pin = 1) = 0;
 		virtual void setLink(std::size_t pin,
 			IComponent &other,
 			std::size_t otherPin) = 0;
-
 		virtual void dump() const = 0;
 		virtual void execute() = 0;
 		virtual IPin *getPin(size_t pos) const = 0;

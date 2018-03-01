@@ -20,6 +20,11 @@ nts::ComponentAND::~ComponentAND()
 {
 }
 
+nts::IComponent *nts::ComponentAND::clone(std::string name) const
+{
+	return new ComponentAND(name);
+}
+
 void nts::ComponentAND::execute()
 {
 	nts::Tristate a = _pin[0]->getStatus();

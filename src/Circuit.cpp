@@ -8,7 +8,7 @@
 #include <fstream>
 #include <iostream>
 #include "Circuit.hpp"
-#include "components/Component4081.hpp"
+#include "components/Component4Gate.hpp"
 
 nts::Circuit::Circuit()
 {
@@ -18,12 +18,20 @@ nts::Circuit::~Circuit()
 {
 }
 
+bool nts::Circuit::alreadyExist(std::string name)
+{
+
+	return (_output.find(name.c_str()) != _output.end()
+		|| _input.find(name.c_str()) != _input.end()
+		|| _component.find(name.c_str()) != _component.end());
+}
+
 bool nts::Circuit::addOutput(std::string name)
 {
 	PinOutput *newOutput = new PinOutput(name);
 
 	//printf("ADD OUTPUT %10s %p\n", name.c_str(), newOutput);
-	if(_output.find(name.c_str()) != _output.end()) {
+	if (alreadyExist(name)) {
 		std::cerr << "output '" << name << "' already exist" << std::endl;
 		return false;
 	}
@@ -36,7 +44,7 @@ bool nts::Circuit::addInput(std::string name)
 	PinInput *newInput = new PinInput(name);
 
 	//printf("ADD INPUT  %10s %p\n", name.c_str(), newInput);
-	if(_input.find(name.c_str()) != _input.end()) {
+	if (alreadyExist(name)) {
 		std::cerr << "input '" << name << "' already exist" << std::endl;
 		return false;
 	}
@@ -46,9 +54,14 @@ bool nts::Circuit::addInput(std::string name)
 
 bool nts::Circuit::addComponent(std::string name, std::string type)
 {
-	IComponent *newComponent = new Component4081(name); /* Remplacer avec la map */
+	IComponent *newComponent;
 
-	if(_component.find(name.c_str()) != _component.end()) {
+	if (componentList.find(type.c_str()) == componentList.end()) {
+		std::cerr << "'" << type << "' isn't a component" << std::endl;
+		return false;
+	}
+	newComponent = componentList[type]->clone(name);
+	if (alreadyExist(name)) {
 		std::cerr << "component '" << name << "' already exist" << std::endl;
 		return false;
 	}
@@ -130,10 +143,11 @@ bool nts::Circuit::readChiptsets(std::ifstream &file, nts::Circuit::readType &st
 		status = LINKS;
 		return true;
 	}
-	else if (a.c_str()[0] != '#') {
+	else if (a.c_str()[0] != '#' && !a.empty()) {
 		file >> b;
 		return parseChipsets(b, a);
-	}
+	} else
+		getline(file, a);
 	return true;
 }
 
@@ -142,10 +156,11 @@ bool nts::Circuit::readLinks(std::ifstream &file, nts::Circuit::readType &status
 	std::string a, b;
 
 	file >> a;
-	if (a.c_str()[0] != '#') {
+	if (a.c_str()[0] != '#' && !a.empty()) {
 		file >> b;
 		return parseLinks(a, b);
-	}
+	} else
+		getline(file, a);
 	return true;
 }
 
@@ -156,6 +171,8 @@ bool nts::Circuit::createCircuitFromFile(std::string fname)
 	readType status = NONE;
 
 	file.open(fname);
+	if (!file)
+		std::cerr << "Invalid File !" << std::endl;
 	while (!file.eof()) {
 		switch (status) {
 		case LINKS:
@@ -168,8 +185,10 @@ bool nts::Circuit::createCircuitFromFile(std::string fname)
 			error = readDefault(file, status);
 			break;
 		}
-		if (!error)
-			break;
+		if (!error) {
+			file.close();
+			return false;
+		}
 	}
 	file.close();
 	return true;

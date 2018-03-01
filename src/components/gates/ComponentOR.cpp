@@ -19,6 +19,11 @@ nts::ComponentOR::~ComponentOR()
 
 }
 
+nts::IComponent *nts::ComponentOR::clone(std::string name) const
+{
+	return new ComponentOR(name);
+}
+
 void nts::ComponentOR::execute()
 {
 	nts::Tristate a = _pin[0]->getStatus();

@@ -10,7 +10,7 @@
 #include "pin/PinInput.hpp"
 #include "pin/PinOutput.hpp"
 #include "components/gates/ComponentOR.hpp"
-#include "components/Component4081.hpp"
+#include "components/Component4Gate.hpp"
 #include "components/gates/ComponentNOT.hpp"
 #include "components/gates/ComponentNAND.hpp"
 #include "components/gates/ComponentNOR.hpp"
@@ -23,7 +23,8 @@ int main(int ac, char **av)
 	nts::Circuit circuit;
 
 	bool aled = circuit.createCircuitFromFile(av[1]);
-	if (aled)
-		circuit.dumpComponent();
-	return aled;
+	if (!aled)
+		return 84;
+	circuit.dumpComponent();
+	return 0;
 }

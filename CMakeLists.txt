@@ -31,10 +31,10 @@ set(SOURCE_FILES
         src/operator/TristateOperator.cpp
         src/components/gates/ComponentOR.cpp
         src/components/gates/ComponentOR.hpp
-        src/components/Component4081.cpp
-        src/components/Component4081.hpp
+        src/components/Component4Gate.cpp
+        src/components/Component4Gate.hpp
         src/components/gates/ComponentNOT.cpp
-        src/components/gates/ComponentNOT.hpp src/components/gates/ComponentNAND.cpp src/components/gates/ComponentNAND.hpp src/components/gates/ComponentNOR.cpp src/components/gates/ComponentNOR.hpp src/components/gates/ComponentXOR.cpp src/components/gates/ComponentXOR.hpp src/components/gates/ComponentXNOR.cpp src/components/gates/ComponentXNOR.hpp src/Circuit.cpp src/Circuit.hpp)
+        src/components/gates/ComponentNOT.hpp src/components/gates/ComponentNAND.cpp src/components/gates/ComponentNAND.hpp src/components/gates/ComponentNOR.cpp src/components/gates/ComponentNOR.hpp src/components/gates/ComponentXOR.cpp src/components/gates/ComponentXOR.hpp src/components/gates/ComponentXNOR.cpp src/components/gates/ComponentXNOR.hpp src/Circuit.cpp src/Circuit.hpp src/componentList.cpp)
 
 add_executable(nanotekspice
         src/main.cpp

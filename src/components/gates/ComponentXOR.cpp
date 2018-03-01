@@ -17,7 +17,11 @@ nts::ComponentXOR::ComponentXOR(std::string name):
 
 nts::ComponentXOR::~ComponentXOR()
 {
+}
 
+nts::IComponent *nts::ComponentXOR::clone(std::string name) const
+{
+	return new ComponentXOR(name);
 }
 
 void nts::ComponentXOR::execute()

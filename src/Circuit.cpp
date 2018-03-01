@@ -7,6 +7,7 @@
 
 #include <fstream>
 #include <iostream>
+#include "Exception/NtsException.hpp"
 #include "Circuit.hpp"
 #include "components/Component4Gate.hpp"
 
@@ -31,10 +32,9 @@ bool nts::Circuit::addOutput(std::string name)
 {
 	PinOutput *newOutput = new PinOutput(name);
 
-	if (alreadyExist(name)) {
-		std::cerr << "output '" << name << "' already exist" << std::endl;
-		return false;
-	}
+	if (alreadyExist(name))
+		throw nts::NtsException("Name already used for a component",
+			name);
 	_output.insert(std::make_pair(name, newOutput));
 	return true;
 }
@@ -43,10 +43,9 @@ bool nts::Circuit::addInput(std::string name)
 {
 	PinInput *newInput = new PinInput(name);
 
-	if (alreadyExist(name)) {
-		std::cerr << "input '" << name << "' already exist" << std::endl;
-		return false;
-	}
+	if (alreadyExist(name))
+		throw nts::NtsException("Name already used for a component",
+			name);
 	_input.insert(std::make_pair(name, newInput));
 	return true;
 }
@@ -55,10 +54,9 @@ bool nts::Circuit::addClock(std::string name)
 {
 	PinInput *newClock = new PinInput(name, nts::TRUE);
 
-	if (alreadyExist(name)) {
-		std::cerr << "clock '" << name << "' already exist" << std::endl;
-		return false;
-	}
+	if (alreadyExist(name))
+		throw nts::NtsException("Name already used for a component",
+			name);
 	_clock.insert(std::make_pair(name, newClock));
 	return true;
 }
@@ -67,15 +65,12 @@ bool nts::Circuit::addComponent(std::string name, std::string type)
 {
 	IComponent *newComponent;
 
-	if (componentList.find(type.c_str()) == componentList.end()) {
-		std::cerr << "'" << type << "' isn't a component type" << std::endl;
-		return false;
-	}
+	if (componentList.find(type.c_str()) == componentList.end())
+		throw nts::NtsException("Invalid Component Type", type);
 	newComponent = componentList[type]->clone(name);
-	if (alreadyExist(name)) {
-		std::cerr << "component '" << name << "' already exist" << std::endl;
-		return false;
-	}
+	if (alreadyExist(name))
+		throw nts::NtsException("Name already used for a component",
+			name);
 	_component.insert(std::make_pair(name, newComponent));
 	return true;
 }
@@ -91,8 +86,7 @@ nts::IPin *nts::Circuit::findPin(std::string name, size_t pos)
 	} else if (_component.find(name.c_str()) != _component.end()) {
 		return _component[name]->getPin(pos);
 	}
-	std::cerr << "'" << name << "' isn't a component !" << std::endl;
-	return (nullptr);
+	throw nts::NtsException("isn't a component !", name);
 }
 
 bool nts::Circuit::linkComponent(std::string name1, size_t pin1,
@@ -101,8 +95,10 @@ bool nts::Circuit::linkComponent(std::string name1, size_t pin1,
 	nts::IPin *a = findPin(name1, pin1 - 1);
 	nts::IPin *b = findPin(name2, pin2 - 1);
 
-	if (a == nullptr || b == nullptr)
-		return false;
+	if (a == nullptr)
+		throw nts::NtsException("Pin not found", name1);
+	if (b == nullptr)
+		throw nts::NtsException("Pin not found", name2);
 	return a->link(b, false);
 }
 

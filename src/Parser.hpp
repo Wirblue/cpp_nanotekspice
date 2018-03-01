@@ -30,7 +30,7 @@ namespace nts {
 		bool parseLinks(std::string a, std::string b);
 		bool readDefault(std::ifstream &file, readType &status);
 		bool readChiptsets(std::ifstream &file, readType &status);
-		bool readLinks(std::ifstream &file, readType &status);
+		bool readLinks(std::ifstream &file);
 
 		Circuit _circuit;
 	};

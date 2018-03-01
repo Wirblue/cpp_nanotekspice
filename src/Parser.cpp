@@ -7,6 +7,7 @@
 
 #include <fstream>
 #include <iostream>
+#include "Exception/NtsException.hpp"
 #include "Parser.hpp"
 
 nts::Parser::Parser()
@@ -19,17 +20,15 @@ nts::Parser::~Parser()
 
 bool nts::Parser::parseChipsets(std::string a, std::string b)
 {
-	bool status;
-
 	if (b == "input")
-		status = _circuit.addInput(a);
+		_circuit.addInput(a);
 	else if (b == "output")
-		status = _circuit.addOutput(a);
+		_circuit.addOutput(a);
 	else if (b == "clock")
-		status = _circuit.addClock(a);
+		_circuit.addClock(a);
 	else
-		status = _circuit.addComponent(a, b);
-	return status;
+		_circuit.addComponent(a, b);
+	return true;
 }
 
 bool nts::Parser::parseLinks(std::string a, std::string b)
@@ -40,7 +39,7 @@ bool nts::Parser::parseLinks(std::string a, std::string b)
 	size_t pin1, pin2;
 
 	if (apos >= a.length() || bpos >= b.length())
-		return false;
+		throw nts::NtsException("Invalid Command", a + b);
 	name1 = a.substr(0, apos);
 	name2 = b.substr(0, bpos);
 	pin1 = (size_t)std::stol(a.substr(apos + 1));
@@ -54,7 +53,8 @@ bool nts::Parser::readDefault(std::ifstream &file, nts::Parser::readType &status
 	std::string line;
 
 	if (!getline(file, line))
-		return false;
+		throw nts::NtsException("Can't read file.",
+			std::__cxx11::string());
 	if (line == ".chipsets:")
 		status = CHIPSETS;
 	return true;
@@ -77,7 +77,7 @@ bool nts::Parser::readChiptsets(std::ifstream &file, nts::Parser::readType &stat
 	return true;
 }
 
-bool nts::Parser::readLinks(std::ifstream &file, nts::Parser::readType &status)
+bool nts::Parser::readLinks(std::ifstream &file)
 {
 	std::string a, b;
 
@@ -93,30 +93,29 @@ bool nts::Parser::readLinks(std::ifstream &file, nts::Parser::readType &status)
 bool nts::Parser::createCircuitFromFile(std::string fname)
 {
 	std::ifstream file;
-	bool error;
 	readType status = NONE;
 
 	file.open(fname);
 	if (!file)
-		std::cerr << "Invalid File !" << std::endl;
+		throw nts::NtsException("Invalid File", fname);
 	while (!file.eof()) {
 		switch (status) {
 		case LINKS:
-			error = readLinks(file, status);
+			readLinks(file);
 			break;
 		case CHIPSETS:
-			error = readChiptsets(file, status);
+			readChiptsets(file, status);
 			break;
 		default:
-			error = readDefault(file, status);
+			readDefault(file, status);
 			break;
-		}
-		if (!error) {
-			file.close();
-			return false;
 		}
 	}
 	file.close();
+	if (status == NONE)
+		throw nts::NtsException("Missing .chipsets section", fname);
+	else if (status == CHIPSETS)
+		throw nts::NtsException("Missing .links section", fname);
 	return true;
 }
 

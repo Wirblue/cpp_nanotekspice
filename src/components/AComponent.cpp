@@ -20,7 +20,7 @@ nts::AComponent::~AComponent()
 
 nts::Tristate nts::AComponent::compute(size_t pin)
 {
-	if (pin > _nbPin || _pin[pin]->getType() == IN)
+	if (pin >= _nbPin || _pin[pin]->getType() == IN)
 		return UNDEFINED;
 	execute();
 	return _pin[pin]->getStatus();
@@ -28,7 +28,7 @@ nts::Tristate nts::AComponent::compute(size_t pin)
 
 void nts::AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
 {
-	if (pin > _nbPin || otherPin > _nbPin)
+	if (pin >= _nbPin || otherPin >= _nbPin)
 		return;
 	_pin[pin]->link(other.getPin(otherPin), false);
 }
@@ -44,5 +44,7 @@ void nts::AComponent::dump() const
 
 nts::IPin *nts::AComponent::getPin(size_t pos) const
 {
+	if (pos >= _nbPin)
+		return nullptr;
 	return _pin[pos];
 }

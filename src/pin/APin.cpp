@@ -19,7 +19,7 @@ nts::APin::~APin()
 
 void nts::APin::dump() const
 {
-	std::cout << getStatus() << " - " << this << " ==> " << _link << std::endl;
+	std::cout << getStatus() << std::endl;
 }
 
 bool nts::APin::link(IPin *pin, bool inComponent)
@@ -33,6 +33,15 @@ bool nts::APin::link(IPin *pin, bool inComponent)
 		return false;
 	}
 
+	if (!_link && getLoc() == nts::OUT && getType() == nts::IN) {
+		if (pin->isLinkable(this)) {
+			_link = pin;
+			pin->link(this, false);
+			return true;
+		} else
+			return false;
+
+	}
 	if (isLinkable(pin) && !_link)
 		_link = pin;
 	else if (pin->isLinkable(this))

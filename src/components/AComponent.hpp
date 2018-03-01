@@ -10,7 +10,7 @@
 
 #include <vector>
 #include <string>
-#include "IPin.hpp"
+#include "../IPin.hpp"
 #include "../pin/APinComponent.hpp"
 #include "../pin/PinComponentIn.hpp"
 #include "../pin/PinComponentOut.hpp"
@@ -24,13 +24,15 @@ namespace nts {
 		virtual void setLink(std::size_t pin, IComponent &other, std::size_t otherPin) override;
 		virtual void dump() const override;
 		virtual Tristate compute(size_t pin) override;
-
 		virtual IPin *getPin(size_t pos) const override;
+		virtual void reset() override;
+		virtual void execute() override;
 
 	protected:
 		std::string _name;
 		std::vector<IPin *> _pin;
 		size_t _nbPin;
+		bool _alreayDone = false;
 	};
 }
 

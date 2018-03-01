@@ -6,8 +6,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -std=c++17")
 include_directories(include)
 
 set(SOURCE_FILES
-        include/IComponent.hpp
-        include/IPin.hpp
+        src/IComponent.hpp
+        src/IPin.hpp
         src/pin/APin.cpp
         src/pin/APin.hpp
         src/pin/APinExt.cpp
@@ -26,8 +26,6 @@ set(SOURCE_FILES
         src/components/AComponent.hpp
         src/components/gates/ComponentAND.cpp
         src/components/gates/ComponentAND.hpp
-        src/pin/PinInput.cpp
-        src/pin/PinInput.hpp
         src/operator/TristateOperator.cpp
         src/components/gates/ComponentOR.cpp
         src/components/gates/ComponentOR.hpp
@@ -52,8 +50,20 @@ set(SOURCE_FILES
         src/components/singleComponents/ComponentFalse.hpp
         src/Parser.cpp
         src/Parser.hpp
-        src/Exception/NtsException.cpp
-        src/Exception/NtsException.hpp src/InGame.cpp src/InGame.hpp)
+        src/exception/NtsException.cpp
+        src/exception/NtsException.hpp
+        src/InGame.cpp
+        src/InGame.hpp
+        src/components/gates/AGate.cpp
+        src/components/gates/AGate.hpp
+        src/components/Component4069.cpp
+        src/components/Component4069.hpp
+        src/components/gates/ComponentFF.cpp
+        src/components/gates/ComponentFF.hpp
+        src/components/Component4013.cpp
+        src/components/Component4013.hpp
+        src/components/Component4017.cpp
+        src/components/Component4017.hpp)
 
 add_executable(nanotekspice
         src/main.cpp

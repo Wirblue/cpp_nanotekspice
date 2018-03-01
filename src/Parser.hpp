@@ -17,6 +17,7 @@ namespace nts {
 		~Parser();
 
 		bool createCircuitFromFile(std::string file);
+		bool addInputValue(char **av);
 		Circuit &getCircuit();
 
 	private:

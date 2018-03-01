@@ -8,7 +8,7 @@
 #include "ComponentNOT.hpp"
 
 nts::ComponentNOT::ComponentNOT(std::string name):
-	AComponent(name, 2)
+	AGate(name, 2)
 {
 	_pin.push_back(new PinComponentIn(this));
 	_pin.push_back(new PinComponentOut(this));
@@ -25,6 +25,8 @@ nts::IComponent *nts::ComponentNOT::clone(std::string name) const
 
 void nts::ComponentNOT::execute()
 {
+	if (_alreayDone)
+		return;
 	nts::Tristate intput = _pin[0]->getStatus();
 
 	_pin[1]->setStatus(!intput);

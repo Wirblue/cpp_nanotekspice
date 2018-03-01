@@ -24,6 +24,8 @@ nts::IComponent *nts::ComponentXNOR::clone(std::string name) const
 
 void nts::ComponentXNOR::execute()
 {
+	if (_alreayDone)
+		return;
 	nts::Tristate a = _pin[0]->getStatus();
 	nts::Tristate b = _pin[1]->getStatus();
 

@@ -8,10 +8,10 @@
 #ifndef CPP_NANOTEKSPICE_COMPONENTNOT_HPP
 #define CPP_NANOTEKSPICE_COMPONENTNOT_HPP
 
-#include "../AComponent.hpp"
+#include "AGate.hpp"
 
 namespace nts {
-	class ComponentNOT : public AComponent {
+	class ComponentNOT : public AGate {
 	public:
 		ComponentNOT(std::string name = "");
 		virtual ~ComponentNOT();

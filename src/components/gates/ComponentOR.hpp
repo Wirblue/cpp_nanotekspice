@@ -8,10 +8,10 @@
 #ifndef CPP_NANOTEKSPICE_COMPONENTOR_HPP
 #define CPP_NANOTEKSPICE_COMPONENTOR_HPP
 
-#include "ComponentAND.hpp"
+#include "AGate.hpp"
 
 namespace nts {
-	class ComponentOR : public AComponent {
+	class ComponentOR : public AGate {
 	public:
 		ComponentOR(std::string name = "");
 		virtual ~ComponentOR();

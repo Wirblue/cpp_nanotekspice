@@ -8,10 +8,10 @@
 #ifndef CPP_NANOTEKSPICE_COMPONENTXOR_HPP
 #define CPP_NANOTEKSPICE_COMPONENTXOR_HPP
 
-#include "../AComponent.hpp"
+#include "AGate.hpp"
 
 namespace nts {
-	class ComponentXOR : public AComponent {
+	class ComponentXOR : public AGate {
 	public:
 		ComponentXOR(std::string name = "");
 		virtual ~ComponentXOR();

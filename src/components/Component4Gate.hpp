@@ -25,6 +25,8 @@ namespace nts {
 
 		virtual IComponent *clone(std::string name) const override;
 
+		virtual void reset() override;
+
 	private:
 		T _andGates[4];
 	};

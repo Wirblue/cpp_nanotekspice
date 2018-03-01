@@ -32,6 +32,7 @@ namespace nts {
 		virtual void dump() const = 0;
 		virtual void execute() = 0;
 		virtual IPin *getPin(size_t pos) const = 0;
+		virtual void reset() = 0;
 	};
 }
 

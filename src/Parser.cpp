@@ -7,7 +7,7 @@
 
 #include <fstream>
 #include <iostream>
-#include "Exception/NtsException.hpp"
+#include "exception/NtsException.hpp"
 #include "Parser.hpp"
 
 nts::Parser::Parser()
@@ -117,6 +117,16 @@ bool nts::Parser::createCircuitFromFile(std::string fname)
 	else if (status == CHIPSETS)
 		throw nts::NtsException("Missing .links section", fname);
 	return true;
+}
+
+bool nts::Parser::addInputValue(char **av)
+{
+	bool status = true;
+
+	for (int i = 0; av[i]; i++)
+		if (!_circuit.setInputFromText(av[i]))
+			status = false;
+	return status;
 }
 
 nts::Circuit &nts::Parser::getCircuit()

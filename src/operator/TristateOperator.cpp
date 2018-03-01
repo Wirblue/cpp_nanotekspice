@@ -5,7 +5,7 @@
 // TristateOperator.cpp
 //
 
-#include "IComponent.hpp"
+#include "../IComponent.hpp"
 
 nts::Tristate operator!(nts::Tristate const &a)
 {

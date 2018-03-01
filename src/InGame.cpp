@@ -11,28 +11,31 @@
 #include <zconf.h>
 #include "Circuit.hpp"
 #include "InGame.hpp"
-
-namespace nts {
-	std::map<std::string, nts::command_t> commandList {
-		{"display", &InGame::display},
-		{"simulate", &InGame::simulate},
-		{"loop", &InGame::loop},
-		{"dump", &InGame::dump},
-	};
-}
+#include "exception/NtsException.hpp"
+#include "exception/NtsException.hpp"
 
 
-/* A changer ???? */
-void baseSigint(int i[[maybe_unused]])
+static void baseSigint(int i[[maybe_unused]])
 {
 	write(1, "\n> ", 3);
 }
 
 bool aled = false;
 
-void loopSiging(int i[[maybe_unused]])
+static void loopSiging(int i[[maybe_unused]])
 {
 	aled = false;
+}
+
+namespace nts {
+	std::map<std::string, nts::command_t> commandList {
+		{"display", &InGame::displayOutput},
+		{"output", &InGame::displayOutput},
+		{"input", &InGame::displayInput},
+		{"simulate", &InGame::simulate},
+		{"loop", &InGame::loop},
+		{"dump", &InGame::dump},
+	};
 }
 
 nts::InGame::InGame(Circuit &circuit):
@@ -43,8 +46,16 @@ nts::InGame::InGame(Circuit &circuit):
 
 void nts::InGame::start()
 {
+	if (!_circuit.checkInput() || !_circuit.checkOutput())
+		throw nts::NtsException("Invalid Input or Output", "Circuit");
+	_circuit.simulate();
 	signal(SIGINT, &(baseSigint));
 	std::cout << "> ";
+	mainLoop();
+}
+
+void nts::InGame::mainLoop()
+{
 	while (getline(std::cin, _lastLine) && _lastLine != "exit") {
 		if (nts::commandList.find(_lastLine.c_str()) != nts::commandList.end())
 			(*this.*(nts::commandList[_lastLine]))();
@@ -54,30 +65,20 @@ void nts::InGame::start()
 	}
 }
 
-void nts::InGame::display()
+void nts::InGame::displayOutput()
 {
-	_circuit.display();
+	_circuit.displayOutput();
+}
+
+void nts::InGame::displayInput()
+{
+	_circuit.displayInput();
 }
 
 void nts::InGame::input()
 {
-	size_t apos = _lastLine.find('=');
-	std::string name1;
-	nts::Tristate value = nts::UNDEFINED;
-
-	name1 = _lastLine.substr(0, apos);
-	if (_lastLine.substr(apos + 1) == "1")
-		value = nts::TRUE;
-	else if (_lastLine.substr(apos + 1) == "0")
-		value = nts::FALSE;
-	else if (_lastLine.substr(apos + 1) == "U")
-		value = nts::UNDEFINED;
-	else {
+	if (!_circuit.setInputFromText(_lastLine))
 		std::cout << "Error: Command not found" << std::endl;
-		return;
-	}
-	std::cout << "Input '" << name1 << "' set to " << value << std::endl;
-	_circuit.setInput(name1, value);
 }
 
 void nts::InGame::simulate()

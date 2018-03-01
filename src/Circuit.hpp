@@ -30,11 +30,16 @@ namespace nts {
 		bool addOutput(std::string name);
 
 		bool linkComponent(std::string name1, size_t pin1, std::string name2, size_t pin2);
+		bool setInputFromText(std::string value);
 
 		void dump();
 		void simulate();
-		void display();
+		void displayOutput();
+		void displayInput();
 		bool setInput(std::string name, nts::Tristate status);
+
+		bool checkOutput();
+		bool checkInput();
 
 	private:
 		bool alreadyExist(std::string name);

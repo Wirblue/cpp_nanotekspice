@@ -8,7 +8,7 @@
 #ifndef CPP_NANOTEKSPICE_PININPUT_HPP
 #define CPP_NANOTEKSPICE_PININPUT_HPP
 
-#include <IComponent.hpp>
+#include "../IComponent.hpp"
 #include "APinExt.hpp"
 
 namespace nts {

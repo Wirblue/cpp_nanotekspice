@@ -8,10 +8,10 @@
 #ifndef CPP_NANOTEKSPICE_COMPONENTAND_HPP
 #define CPP_NANOTEKSPICE_COMPONENTAND_HPP
 
-#include "../AComponent.hpp"
+#include "AGate.hpp"
 
 namespace nts {
-	class ComponentAND : public AComponent {
+	class ComponentAND : public AGate {
 	public:
 		ComponentAND(std::string name = "");
 		virtual ~ComponentAND();

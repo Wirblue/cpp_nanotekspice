@@ -5,7 +5,7 @@
 // PinOutput.cpp
 //
 
-#include <IComponent.hpp>
+#include "../IComponent.hpp"
 #include "PinOutput.hpp"
 
 nts::PinOutput::PinOutput(std::string name):

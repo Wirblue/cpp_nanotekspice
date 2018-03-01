@@ -8,7 +8,7 @@
 #include "ComponentOR.hpp"
 
 nts::ComponentOR::ComponentOR(std::string name) :
-	AComponent(name, 3)
+	AGate(name, 3)
 {
 	_pin.push_back(new PinComponentIn(this));
 	_pin.push_back(new PinComponentIn(this));
@@ -26,6 +26,8 @@ nts::IComponent *nts::ComponentOR::clone(std::string name) const
 
 void nts::ComponentOR::execute()
 {
+	if (_alreayDone)
+		return;
 	nts::Tristate a = _pin[0]->getStatus();
 	nts::Tristate b = _pin[1]->getStatus();
 

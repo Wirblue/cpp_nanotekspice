@@ -37,7 +37,7 @@ void nts::AComponent::dump() const
 {
 	std::cout << _name << ":" << std::endl;
 	for (size_t i = 0; i < _nbPin; i++) {
-		std::cout << i << ": ";
+		std::cout << i + 1 << ": ";
 		_pin[i]->dump();
 	}
 }
@@ -47,4 +47,14 @@ nts::IPin *nts::AComponent::getPin(size_t pos) const
 	if (pos >= _nbPin)
 		return nullptr;
 	return _pin[pos];
+}
+
+void nts::AComponent::reset()
+{
+	_alreayDone = false;
+}
+
+void nts::AComponent::execute()
+{
+	_alreayDone = true;
 }

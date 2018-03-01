@@ -25,18 +25,10 @@ nts::Component4Gate<T>::Component4Gate(std::string name):
 	_pin.push_back(new PinComponentIn(this));
 	_pin.push_back(new PinComponentIn(this));
 	_pin.push_back(new PinComponentOut(this));
-	_andGates[0].getPin(0)->link(_pin[0], true);
-	_andGates[0].getPin(1)->link(_pin[1], true);
-	_pin[2]->link(_andGates[0].getPin(2), true);
-	_andGates[1].getPin(0)->link(_pin[4], true);
-	_andGates[1].getPin(1)->link(_pin[5], true);
-	_pin[3]->link(_andGates[1].getPin(2), true);
-	_andGates[2].getPin(0)->link(_pin[7], true);
-	_andGates[2].getPin(1)->link(_pin[8], true);
-	_pin[9]->link(_andGates[2].getPin(2), true);
-	_andGates[3].getPin(0)->link(_pin[11], true);
-	_andGates[3].getPin(1)->link(_pin[12], true);
-	_pin[10]->link(_andGates[3].getPin(2), true);
+	_andGates[0].linkPin({_pin[0], _pin[1], _pin[2]});
+	_andGates[1].linkPin({_pin[5], _pin[4], _pin[3]});
+	_andGates[2].linkPin({_pin[7], _pin[8], _pin[9]});
+	_andGates[3].linkPin({_pin[12], _pin[11], _pin[10]});
 }
 
 template<typename T>
@@ -53,9 +45,21 @@ nts::IComponent *nts::Component4Gate<T>::clone(std::string name) const
 template<typename T>
 void nts::Component4Gate<T>::execute()
 {
-	for (int i = 0; i < 0; i++)
-		_andGates[i].execute();
+	if (_alreayDone)
+		return;
+	for (auto gate : _andGates)
+		gate.execute();
+	AComponent::execute();
 }
+
+template<typename T>
+void nts::Component4Gate<T>::reset()
+{
+	AComponent::reset();
+	for (auto gate : _andGates)
+		gate.reset();
+}
+
 template class nts::Component4Gate<nts::ComponentNOR>;
 template class nts::Component4Gate<nts::ComponentNAND>;
 template class nts::Component4Gate<nts::ComponentXOR>;

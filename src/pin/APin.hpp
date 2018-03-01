@@ -8,7 +8,7 @@
 #ifndef CPP_NANOTEKSPICE_APIN_HPP
 #define CPP_NANOTEKSPICE_APIN_HPP
 
-#include "IPin.hpp"
+#include "../IPin.hpp"
 
 namespace nts {
 	class APin : public IPin {

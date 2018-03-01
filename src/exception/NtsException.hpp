@@ -15,7 +15,7 @@ namespace nts {
 	class NtsException : public std::exception {
 	public:
 		NtsException(std::string const &message,
-			std::string detail);
+			std::string detail = "");
 
 		const char *what() const throw() override;
 	private:

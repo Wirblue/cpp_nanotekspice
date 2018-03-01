@@ -161,7 +161,6 @@ bool nts::Circuit::setInputFromText(std::string text)
 		value = nts::UNDEFINED;
 	else
 		return false;
-	std::cout << "Input '" << name1 << "' set to " << value << std::endl;
 	setInput(name1, value);
 	return true;
 }

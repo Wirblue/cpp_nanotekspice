@@ -14,7 +14,7 @@ namespace nts {
 	class PinComponentIn : public APinComponent {
 	public:
 		PinComponentIn(IComponent *component = nullptr);
-		~PinComponentIn();
+		~PinComponentIn() = default;
 
 		virtual PinType getType() const override;
 

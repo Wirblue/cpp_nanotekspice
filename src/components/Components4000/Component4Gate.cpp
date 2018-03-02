@@ -45,8 +45,6 @@ nts::IComponent *nts::Component4Gate<T>::clone(std::string name) const
 template<typename T>
 void nts::Component4Gate<T>::execute()
 {
-	if (!tryExecution())
-		return;
 	for (auto gate : _andGates)
 		gate.execute();
 }
@@ -54,8 +52,8 @@ void nts::Component4Gate<T>::execute()
 template<typename T>
 void nts::Component4Gate<T>::reset()
 {
-	for (auto gate : _andGates)
-		gate.reset();
+	for (int i = 0; i < 4; i++)
+		_andGates[i].reset();
 	_alreayDone = false;
 }
 

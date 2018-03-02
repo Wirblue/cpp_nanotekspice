@@ -46,7 +46,6 @@ bool nts::APin::link(IPin *pin, bool inComponent)
 		std::cerr << "Can't link to null !" << std::endl;
 		return false;
 	}
-
 	if (!_link && getLoc() == nts::OUT && getType() == nts::IN) {
 		if (pin->isLinkable(this)) {
 			_link = pin;

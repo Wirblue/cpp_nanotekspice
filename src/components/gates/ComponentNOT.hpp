@@ -14,7 +14,7 @@ namespace nts {
 	class ComponentNOT : public AGate {
 	public:
 		ComponentNOT(std::string name = "");
-		virtual ~ComponentNOT();
+		virtual ~ComponentNOT() = default;
 
 		virtual void execute() override;
 

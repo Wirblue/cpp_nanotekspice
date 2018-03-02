@@ -14,10 +14,6 @@ nts::ComponentNOT::ComponentNOT(std::string name):
 	_pin.push_back(new PinComponentOut(this));
 }
 
-nts::ComponentNOT::~ComponentNOT()
-{
-}
-
 nts::IComponent *nts::ComponentNOT::clone(std::string name) const
 {
 	return new ComponentNOT(name);

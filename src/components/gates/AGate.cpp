@@ -16,7 +16,7 @@ void nts::AGate::linkPin(std::vector<IPin *> pins)
 {
 	size_t i = 0;
 
-	for (auto pin : pins) {
+	for (IPin *pin : pins) {
 		if (i > _nbPin)
 			return;
 		if (pin && pin->getType() == IN)

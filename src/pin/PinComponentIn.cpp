@@ -13,10 +13,6 @@ nts::PinComponentIn::PinComponentIn(nts::IComponent *component):
 
 }
 
-nts::PinComponentIn::~PinComponentIn()
-{
-}
-
 nts::PinType nts::PinComponentIn::getType() const
 {
 	return IN;

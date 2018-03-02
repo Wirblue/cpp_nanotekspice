@@ -44,7 +44,7 @@ bool nts::Circuit::addInput(std::string name)
 
 bool nts::Circuit::addClock(std::string name)
 {
-	PinInput *newClock = new PinInput(name, nts::TRUE);
+	PinInput *newClock = new PinInput(name, nts::FALSE);
 
 	if (alreadyExist(name))
 		throw nts::NtsException("Name already used for a component",

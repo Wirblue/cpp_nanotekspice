@@ -23,6 +23,8 @@ namespace nts {
 		void simulate();
 		void loop();
 		void dump();
+		void clocks();
+		void reset();
 
 	private:
 		void mainLoop();

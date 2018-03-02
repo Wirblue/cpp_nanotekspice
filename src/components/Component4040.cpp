@@ -52,9 +52,8 @@ void nts::Component4040::printPinBinary()
 
 void nts::Component4040::execute()
 {
-	if (_alreayDone)
+	if (!tryExecution())
 		return;
-	AComponent::execute();
 	if (_pin[10]->compute() == nts::TRUE)
 		_av = 0;
 	else if (_pin[9]->compute() == nts::TRUE && _lastState != nts::TRUE)

@@ -24,7 +24,7 @@ nts::IComponent *nts::ComponentNOR::clone(std::string name) const
 
 void nts::ComponentNOR::execute()
 {
-	if (_alreayDone)
+	if (!tryExecution())
 		return;
 	_pin[2]->setStatus(!(_pin[0]->compute() | _pin[1]->compute()));
 }

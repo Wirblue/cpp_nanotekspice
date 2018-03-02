@@ -43,16 +43,15 @@ nts::IComponent *nts::Component4069::clone(std::string name) const
 
 void nts::Component4069::execute()
 {
-	if (_alreayDone)
+	if (!tryExecution())
 		return;
 	for (auto gate : _notGate)
 		gate.execute();
-	AComponent::execute();
 }
 
 void nts::Component4069::reset()
 {
 	for (auto gate : _notGate)
 		gate.reset();
-	AComponent::reset();
+	_alreayDone = false;
 }

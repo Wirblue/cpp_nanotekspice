@@ -21,8 +21,8 @@ namespace nts {
 
 	class Circuit {
 	public:
-		Circuit();
-		~Circuit();
+		Circuit() = default;
+		~Circuit() = default;
 
 		bool addInput(std::string name);
 		bool addClock(std::string name);
@@ -33,6 +33,8 @@ namespace nts {
 		bool setInputFromText(std::string value);
 
 		void dump();
+		void reset();
+		void clocks();
 		void simulate();
 		void displayOutput();
 		void displayInput();
@@ -44,7 +46,6 @@ namespace nts {
 	private:
 		bool alreadyExist(std::string name);
 		IPin *findPin(std::string name, size_t pos);
-		void moveClocks();
 
 		std::map<std::string, PinInput *> _input;
 		std::map<std::string, PinInput *> _clock;

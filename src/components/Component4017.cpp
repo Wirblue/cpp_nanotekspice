@@ -52,7 +52,7 @@ void nts::Component4017::openOnlyOne(size_t open)
 
 void nts::Component4017::execute()
 {
-	if (_alreayDone)
+	if (!tryExecution())
 		return;
 	if (_pin[14]->compute() == nts::TRUE)
 		_av = 0;
@@ -63,5 +63,4 @@ void nts::Component4017::execute()
 	_lastState = _pin[13]->getStatus();
 	openOnlyOne(_av);
 	_pin[11]->setStatus(_av >= pinOrder.size() / 2 ? nts::FALSE : nts::TRUE);
-	AComponent::execute();
 }

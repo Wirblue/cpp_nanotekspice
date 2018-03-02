@@ -19,16 +19,18 @@ namespace nts {
 	class AComponent : public IComponent {
 	public:
 		AComponent(std::string name, size_t size);
-		~AComponent();
+		virtual ~AComponent() = default;
 
-		virtual void setLink(std::size_t pin, IComponent &other, std::size_t otherPin) override;
 		virtual void dump() const override;
-		virtual Tristate compute(size_t pin) override;
 		virtual IPin *getPin(size_t pos) const override;
-		virtual void reset() override;
-		virtual void execute() override;
 
-		virtual bool alreadyCalc() override;
+		virtual bool tryExecution() override;
+		virtual void reset() override;
+
+		virtual void setLink(std::size_t pin,
+			IComponent &other,
+			std::size_t otherPin) override;
+		virtual Tristate compute(size_t pin) override;
 
 	protected:
 		std::string _name;

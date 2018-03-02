@@ -29,10 +29,6 @@ nts::Component4013::Component4013(std::string name):
 	_ffGate[1].linkPin({_pin[12], _pin[11], _pin[10], _pin[9], _pin[8], _pin[7]});
 }
 
-nts::Component4013::~Component4013()
-{
-}
-
 nts::IComponent *nts::Component4013::clone(std::string name) const
 {
 	return new Component4013(name);
@@ -40,16 +36,15 @@ nts::IComponent *nts::Component4013::clone(std::string name) const
 
 void nts::Component4013::execute()
 {
-	//if (_alreayDone)
-	//	return;
-	//for (auto gate : _ffGate)
-	_ffGate->execute();
-	AComponent::execute();
+	if (!tryExecution())
+		return;
+	_ffGate[0].execute();
+	_ffGate[1].execute();
 }
 
 void nts::Component4013::reset()
 {
-	for (auto gate : _ffGate)
-		gate.reset();
-	AComponent::reset();
+	_ffGate[0].reset();
+	_ffGate[1].reset();
+	_alreayDone = false;
 }

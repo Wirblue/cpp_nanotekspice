@@ -15,13 +15,13 @@ namespace nts {
 	class ComponentFF : public AGate {
 	public:
 		ComponentFF(std::string name = "");
-		~ComponentFF();
+		~ComponentFF() = default;
 
 		virtual IComponent *clone(std::string name) const override;
 		virtual void execute() override;
 
 	private:
-		Tristate _memory = UNDEFINED;
+		Tristate _memory = FALSE;
 		Tristate _reset = UNDEFINED;
 		Tristate _lastState = UNDEFINED;
 	};

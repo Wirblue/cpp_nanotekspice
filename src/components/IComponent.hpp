@@ -25,15 +25,18 @@ namespace nts {
 		virtual ~IComponent() = default;
 
 		virtual IComponent *clone(std::string name) const = 0;
+
+		virtual void dump() const = 0;
+		virtual IPin *getPin(size_t pos) const = 0;
+
+		virtual void execute() = 0;
+		virtual bool tryExecution() = 0;
+		virtual void reset() = 0;
+
 		virtual Tristate compute(std::size_t pin = 1) = 0;
 		virtual void setLink(std::size_t pin,
 			IComponent &other,
 			std::size_t otherPin) = 0;
-		virtual void dump() const = 0;
-		virtual void execute() = 0;
-		virtual IPin *getPin(size_t pos) const = 0;
-		virtual void reset() = 0;
-		virtual bool alreadyCalc() = 0;
 	};
 }
 

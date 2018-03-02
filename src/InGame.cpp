@@ -35,6 +35,8 @@ namespace nts {
 		{"simulate", &InGame::simulate},
 		{"loop", &InGame::loop},
 		{"dump", &InGame::dump},
+		{"clocks", &InGame::clocks},
+		{"reset", &InGame::reset},
 	};
 }
 
@@ -101,4 +103,14 @@ void nts::InGame::loop()
 void nts::InGame::dump()
 {
 	_circuit.dump();
+}
+
+void nts::InGame::clocks()
+{
+	_circuit.clocks();
+}
+
+void nts::InGame::reset()
+{
+	_circuit.reset();
 }

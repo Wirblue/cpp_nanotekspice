@@ -11,14 +11,6 @@
 #include "Circuit.hpp"
 #include "components/Component4Gate.hpp"
 
-nts::Circuit::Circuit()
-{
-}
-
-nts::Circuit::~Circuit()
-{
-}
-
 bool nts::Circuit::alreadyExist(std::string name)
 {
 
@@ -112,14 +104,19 @@ void nts::Circuit::dump()
 	}
 }
 
+void nts::Circuit::reset()
+{
+	for (auto gate : _component)
+		gate.second->reset();
+}
+
 void nts::Circuit::simulate()
 {
+	reset();
+	clocks();
 	for (auto const& p : _output) {
 		p.second->compute();
 	}
-	moveClocks();
-	for (auto gate : _component)
-		gate.second->reset();
 }
 
 void nts::Circuit::displayOutput()
@@ -140,10 +137,8 @@ void nts::Circuit::displayInput()
 
 bool nts::Circuit::setInput(std::string name, nts::Tristate status)
 {
-	if (_input.find(name.c_str()) == _input.end()) {
-		std::cerr << "Invalid Input !" << std::endl;
-		return false;
-	}
+	if (_input.find(name.c_str()) == _input.end())
+		throw nts::NtsException("Invalid Input", name);
 	_input[name]->setStatus(status);
 	return true;
 }
@@ -191,7 +186,7 @@ bool nts::Circuit::checkInput()
 	return status;
 }
 
-void nts::Circuit::moveClocks()
+void nts::Circuit::clocks()
 {
 	for (auto const& p : _clock) {
 		p.second->setStatus(!p.second->getStatus());

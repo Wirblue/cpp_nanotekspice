@@ -45,19 +45,18 @@ nts::IComponent *nts::Component4Gate<T>::clone(std::string name) const
 template<typename T>
 void nts::Component4Gate<T>::execute()
 {
-	if (_alreayDone)
+	if (!tryExecution())
 		return;
 	for (auto gate : _andGates)
 		gate.execute();
-	AComponent::execute();
 }
 
 template<typename T>
 void nts::Component4Gate<T>::reset()
 {
-	AComponent::reset();
 	for (auto gate : _andGates)
 		gate.reset();
+	_alreayDone = false;
 }
 
 template class nts::Component4Gate<nts::ComponentNOR>;

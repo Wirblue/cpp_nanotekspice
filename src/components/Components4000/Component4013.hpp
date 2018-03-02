@@ -8,8 +8,8 @@
 #ifndef CPP_NANOTEKSPICE_COMPONENT4013_HPP
 #define CPP_NANOTEKSPICE_COMPONENT4013_HPP
 
-#include "AComponent.hpp"
-#include "ComponentFF.hpp"
+#include "../AComponent.hpp"
+#include "../ComponentFF.hpp"
 
 namespace nts {
 	class Component4013 : public AComponent {

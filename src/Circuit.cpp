@@ -9,7 +9,7 @@
 #include <iostream>
 #include "exception/NtsException.hpp"
 #include "Circuit.hpp"
-#include "components/Component4Gate.hpp"
+#include "components/Components4000/Component4Gate.hpp"
 
 bool nts::Circuit::alreadyExist(std::string name)
 {

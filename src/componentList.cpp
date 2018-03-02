@@ -5,14 +5,16 @@
 ** componentList.cpp
 */
 
-#include "components/Component4Gate.hpp"
+#include "components/Components4000/Component4Gate.hpp"
 #include "components/singleComponents/ComponentFalse.hpp"
 #include "components/singleComponents/ComponentTrue.hpp"
-#include "components/Component4069.hpp"
+#include "components/Components4000/Component4069.hpp"
 #include "components/ComponentFF.hpp"
-#include "components/Component4013.hpp"
-#include "components/Component4017.hpp"
-#include "components/Component4040.hpp"
+#include "components/Components4000/Component4013.hpp"
+#include "components/Components4000/Component4017.hpp"
+#include "components/Components4000/Component4040.hpp"
+#include "components/Components4000/Component4503.hpp"
+#include "components/Components4000/Component4514.hpp"
 #include <map>
 
 namespace nts {
@@ -27,6 +29,8 @@ namespace nts {
 		{"4040", new Component4040()},
 		{"4069", new Component4069()},
 		{"4071", new Component4071()},
-		{"4081", new Component4081()}
+		{"4081", new Component4081()},
+		{"4503", new Component4503()},
+		{"4514", new Component4514()}
 	};
 }

@@ -29,8 +29,8 @@ set(SOURCE_FILES
         src/operator/TristateOperator.cpp
         src/components/gates/ComponentOR.cpp
         src/components/gates/ComponentOR.hpp
-        src/components/Component4Gate.cpp
-        src/components/Component4Gate.hpp
+        src/components/Components4000/Component4Gate.cpp
+        src/components/Components4000/Component4Gate.hpp
         src/components/gates/ComponentNOT.cpp
         src/components/gates/ComponentNOT.hpp
         src/components/gates/ComponentNAND.cpp
@@ -56,14 +56,20 @@ set(SOURCE_FILES
         src/InGame.hpp
         src/components/gates/AGate.cpp
         src/components/gates/AGate.hpp
-        src/components/Component4069.cpp
-        src/components/Component4069.hpp
+        src/components/Components4000/Component4069.cpp
+        src/components/Components4000/Component4069.hpp
         src/components/ComponentFF.cpp
         src/components/ComponentFF.hpp
-        src/components/Component4013.cpp
-        src/components/Component4013.hpp
-        src/components/Component4017.cpp
-        src/components/Component4017.hpp src/components/Component4040.cpp src/components/Component4040.hpp)
+        src/components/Components4000/Component4013.cpp
+        src/components/Components4000/Component4013.hpp
+        src/components/Components4000/Component4017.cpp
+        src/components/Components4000/Component4017.hpp
+        src/components/Components4000/Component4040.cpp
+        src/components/Components4000/Component4040.hpp
+        src/components/Components4000/Component4503.cpp
+        src/components/Components4000/Component4503.hpp
+        src/components/Components4000/Component4514.cpp
+        src/components/Components4000/Component4514.hpp)
 
 add_executable(nanotekspice
         src/main.cpp

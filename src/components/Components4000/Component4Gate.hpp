@@ -8,11 +8,11 @@
 #ifndef CPP_NANOTEKSPICE_COMPONENT4081_HPP
 #define CPP_NANOTEKSPICE_COMPONENT4081_HPP
 
-#include "AComponent.hpp"
-#include "gates/ComponentAND.hpp"
-#include "gates/ComponentXOR.hpp"
-#include "gates/ComponentNAND.hpp"
-#include "gates/ComponentNOR.hpp"
+#include "../AComponent.hpp"
+#include "../gates/ComponentAND.hpp"
+#include "../gates/ComponentXOR.hpp"
+#include "../gates/ComponentNAND.hpp"
+#include "../gates/ComponentNOR.hpp"
 
 namespace nts {
 	template <typename T>

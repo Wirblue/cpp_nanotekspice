@@ -8,8 +8,8 @@
 #ifndef CPP_NANOTEKSPICE_COMPONENT4069_HPP
 #define CPP_NANOTEKSPICE_COMPONENT4069_HPP
 
-#include "AComponent.hpp"
-#include "gates/ComponentNOT.hpp"
+#include "../AComponent.hpp"
+#include "../gates/ComponentNOT.hpp"
 
 namespace nts {
 	class Component4069 : public AComponent {

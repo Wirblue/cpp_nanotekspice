@@ -10,7 +10,7 @@
 #include "pin/PinInput.hpp"
 #include "pin/PinOutput.hpp"
 #include "components/gates/ComponentOR.hpp"
-#include "components/Component4Gate.hpp"
+#include "components/Components4000/Component4Gate.hpp"
 #include "components/gates/ComponentNOT.hpp"
 #include "components/gates/ComponentXNOR.hpp"
 #include "Circuit.hpp"

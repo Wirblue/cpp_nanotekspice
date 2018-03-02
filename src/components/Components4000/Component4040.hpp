@@ -8,7 +8,7 @@
 #ifndef CPP_NANOTEKSPICE_COMPONENT4040_HPP
 #define CPP_NANOTEKSPICE_COMPONENT4040_HPP
 
-#include "AComponent.hpp"
+#include "../AComponent.hpp"
 
 namespace nts {
 	class Component4040 : public AComponent {

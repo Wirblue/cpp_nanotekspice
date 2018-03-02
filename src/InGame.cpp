@@ -48,6 +48,7 @@ void nts::InGame::start()
 {
 	if (!_circuit.checkInput() || !_circuit.checkOutput())
 		throw nts::NtsException("Invalid Input or Output", "Circuit");
+	_circuit.simulate();
 	_circuit.displayOutput();
 	signal(SIGINT, &(baseSigint));
 	std::cout << "> ";

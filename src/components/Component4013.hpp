@@ -9,7 +9,7 @@
 #define CPP_NANOTEKSPICE_COMPONENT4013_HPP
 
 #include "AComponent.hpp"
-#include "gates/ComponentFF.hpp"
+#include "ComponentFF.hpp"
 
 namespace nts {
 	class Component4013 : public AComponent {

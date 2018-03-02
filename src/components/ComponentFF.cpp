@@ -5,6 +5,7 @@
 // ComponentFF.cpp
 //
 
+#include <iostream>
 #include "ComponentFF.hpp"
 
 nts::ComponentFF::ComponentFF(std::string name):
@@ -20,7 +21,6 @@ nts::ComponentFF::ComponentFF(std::string name):
 
 nts::ComponentFF::~ComponentFF()
 {
-
 }
 
 nts::IComponent *nts::ComponentFF::clone(std::string name) const
@@ -30,22 +30,10 @@ nts::IComponent *nts::ComponentFF::clone(std::string name) const
 
 void nts::ComponentFF::execute()
 {
-	if (_alreayDone)
-		return;
 	nts::Tristate a = _pin[5]->getStatus();
 	nts::Tristate b = _pin[3]->getStatus();
 
-	if (a == nts::TRUE && b != nts::TRUE)
-		memory = FALSE;
-	else if (a != nts::TRUE && b == nts::TRUE)
-		memory = nts::TRUE;
-
-	if (a == nts::TRUE || memory == nts::FALSE)
-		_pin[0]->setStatus(nts::TRUE);
-	else
-		_pin[0]->setStatus(a);
-	if (b == nts::TRUE || memory == nts::TRUE)
-		_pin[1]->setStatus(nts::TRUE);
-	else
-		_pin[1]->setStatus(b);
+	_pin[0]->setStatus(a);
+	_pin[1]->setStatus(b);
+	AComponent::execute();
 }

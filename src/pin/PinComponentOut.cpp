@@ -12,20 +12,19 @@ nts::PinComponentOut::PinComponentOut(nts::IComponent *component):
 {
 }
 
-nts::PinComponentOut::~PinComponentOut()
-{
-}
-
-nts::Tristate nts::PinComponentOut::getStatus() const
-{
-	if (_component)
-		_component->execute();
-	if (_link)
-		return _link->getStatus();
-	return _status;
-}
-
 nts::PinType nts::PinComponentOut::getType() const
 {
 	return OUT;
+}
+
+nts::Tristate nts::PinComponentOut::compute()
+{
+	if (_link) {
+		_link->compute();
+		_status = _link->getStatus();
+	} else if (_component)
+		_component->execute();
+	else
+		_status = nts::UNDEFINED;
+	return _status;
 }

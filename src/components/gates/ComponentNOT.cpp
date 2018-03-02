@@ -27,7 +27,5 @@ void nts::ComponentNOT::execute()
 {
 	if (_alreayDone)
 		return;
-	nts::Tristate intput = _pin[0]->getStatus();
-
-	_pin[1]->setStatus(!intput);
+	_pin[1]->setStatus(!_pin[0]->compute());
 }

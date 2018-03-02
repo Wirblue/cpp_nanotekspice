@@ -26,8 +26,5 @@ void nts::ComponentNOR::execute()
 {
 	if (_alreayDone)
 		return;
-	nts::Tristate a = _pin[0]->getStatus();
-	nts::Tristate b = _pin[1]->getStatus();
-
-	_pin[2]->setStatus(!(a | b));
+	_pin[2]->setStatus(!(_pin[0]->compute() | _pin[1]->compute()));
 }

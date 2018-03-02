@@ -13,14 +13,12 @@
 namespace nts {
 	class PinComponentOut : public APinComponent {
 	public:
-		PinComponentOut(IComponent *component = nullptr);
-		~PinComponentOut();
+		explicit PinComponentOut(IComponent *component = nullptr);
+		~PinComponentOut() = default;
 
-		virtual Tristate getStatus() const override;
 		virtual PinType getType() const override;
 
-	private:
-		Tristate _lastCall;
+		virtual Tristate compute() override;
 	};
 }
 

@@ -8,18 +8,32 @@
 #include <iostream>
 #include "APin.hpp"
 
-nts::APin::APin()
+nts::APin::APin():
+	_link(nullptr), _status(nts::UNDEFINED)
 {
-	_link = nullptr;
 }
 
-nts::APin::~APin()
-{
-}
 
 void nts::APin::dump() const
 {
 	std::cout << getStatus() << std::endl;
+}
+
+
+nts::Tristate nts::APin::getStatus() const
+{
+	return _status;
+}
+
+void nts::APin::setStatus(Tristate status)
+{
+	_status = status;
+}
+
+
+nts::IPin *nts::APin::getLink() const
+{
+	return _link;
 }
 
 bool nts::APin::link(IPin *pin, bool inComponent)
@@ -51,16 +65,6 @@ bool nts::APin::link(IPin *pin, bool inComponent)
 		return false;
 	}
 	return true;
-}
-
-void nts::APin::setStatus(Tristate status)
-{
-	_status = status;
-}
-
-nts::IPin *nts::APin::getLink() const
-{
-	return _link;
 }
 
 bool nts::APin::isLinkable(IPin *link) const

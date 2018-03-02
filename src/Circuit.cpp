@@ -68,6 +68,8 @@ bool nts::Circuit::addComponent(std::string name, std::string type)
 	if (componentList.find(type.c_str()) == componentList.end())
 		throw nts::NtsException("Invalid Component Type", type);
 	newComponent = componentList[type]->clone(name);
+	if (!newComponent)
+		throw nts::NtsException("Error at creation", type);
 	if (alreadyExist(name))
 		throw nts::NtsException("Name already used for a component",
 			name);
@@ -113,7 +115,7 @@ void nts::Circuit::dump()
 void nts::Circuit::simulate()
 {
 	for (auto const& p : _output) {
-		p.second->getStatus();
+		p.second->compute();
 	}
 	moveClocks();
 	for (auto gate : _component)

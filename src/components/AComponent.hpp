@@ -10,7 +10,7 @@
 
 #include <vector>
 #include <string>
-#include "../IPin.hpp"
+#include "../pin/IPin.hpp"
 #include "../pin/APinComponent.hpp"
 #include "../pin/PinComponentIn.hpp"
 #include "../pin/PinComponentOut.hpp"
@@ -27,6 +27,8 @@ namespace nts {
 		virtual IPin *getPin(size_t pos) const override;
 		virtual void reset() override;
 		virtual void execute() override;
+
+		virtual bool alreadyCalc() override;
 
 	protected:
 		std::string _name;

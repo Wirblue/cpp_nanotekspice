@@ -8,16 +8,7 @@
 #include "PinInput.hpp"
 
 nts::PinInput::PinInput(std::string name, nts::Tristate status):
-	APinExt(name), _status(status)
-{
-}
-
-nts::Tristate nts::PinInput::getStatus() const
-{
-	return _status;
-}
-
-void nts::PinInput::setStatus(nts::Tristate status)
+	APinExt(name)
 {
 	_status = status;
 }
@@ -25,4 +16,9 @@ void nts::PinInput::setStatus(nts::Tristate status)
 nts::PinType nts::PinInput::getType() const
 {
 	return IN;
+}
+
+nts::Tristate nts::PinInput::compute()
+{
+	return _status;
 }

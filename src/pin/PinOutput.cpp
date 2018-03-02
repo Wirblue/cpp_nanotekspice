@@ -5,7 +5,7 @@
 // PinOutput.cpp
 //
 
-#include "../IComponent.hpp"
+#include "../components/IComponent.hpp"
 #include "PinOutput.hpp"
 
 nts::PinOutput::PinOutput(std::string name):
@@ -17,14 +17,18 @@ nts::PinOutput::~PinOutput()
 {
 }
 
-nts::Tristate nts::PinOutput::getStatus() const
-{
-	if (!this->_link)
-		return UNDEFINED;
-	return this->_link->getStatus();
-}
-
 nts::PinType nts::PinOutput::getType() const
 {
 	return OUT;
+}
+
+nts::Tristate nts::PinOutput::compute()
+{
+	if (!_link)
+		_status = nts::UNDEFINED;
+	else {
+		_link->compute();
+		_status = _link->getStatus();
+	}
+	return _status;
 }

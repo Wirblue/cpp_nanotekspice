@@ -33,6 +33,7 @@ namespace nts {
 		virtual void execute() = 0;
 		virtual IPin *getPin(size_t pos) const = 0;
 		virtual void reset() = 0;
+		virtual bool alreadyCalc() = 0;
 	};
 }
 

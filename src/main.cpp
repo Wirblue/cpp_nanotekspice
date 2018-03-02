@@ -17,7 +17,7 @@
 #include "Parser.hpp"
 #include "InGame.hpp"
 #include "exception/NtsException.hpp"
-#include "components/gates/ComponentFF.hpp"
+#include "components/ComponentFF.hpp"
 
 int main(int ac[[maybe_unused]], char **av)
 {

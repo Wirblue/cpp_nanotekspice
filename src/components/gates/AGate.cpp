@@ -12,10 +12,6 @@ nts::AGate::AGate(std::string name, size_t size):
 {
 }
 
-nts::AGate::~AGate()
-{
-}
-
 void nts::AGate::linkPin(std::vector<IPin *> pins)
 {
 	size_t i = 0;

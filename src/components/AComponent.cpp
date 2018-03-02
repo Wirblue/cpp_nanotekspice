@@ -49,6 +49,11 @@ nts::IPin *nts::AComponent::getPin(size_t pos) const
 	return _pin[pos];
 }
 
+bool nts::AComponent::alreadyCalc()
+{
+	return _alreayDone;
+}
+
 void nts::AComponent::reset()
 {
 	_alreayDone = false;

@@ -12,19 +12,17 @@ nts::APinExt::APinExt(std::string name):
 {
 }
 
-nts::APinExt::~APinExt()
-{
-}
 
 void nts::APinExt::setName(std::string name)
 {
 	_name = name;
 }
 
-std::string &nts::APinExt::getName()
+std::string nts::APinExt::getName()
 {
 	return _name;
 }
+
 
 nts::PinType nts::APinExt::getLoc() const
 {

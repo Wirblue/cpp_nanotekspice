@@ -8,24 +8,23 @@
 #ifndef CPP_NANOTEKSPICE_APIN_HPP
 #define CPP_NANOTEKSPICE_APIN_HPP
 
-#include "../IPin.hpp"
+#include "IPin.hpp"
 
 namespace nts {
 	class APin : public IPin {
 	public:
 		APin();
-		~APin() override;
+		virtual ~APin() = default;
 
-		virtual bool link(IPin *pin, bool inComponent) override;
 		virtual void dump() const override;
-		virtual void setStatus(Tristate status) override;
-		virtual Tristate getStatus() const override = 0;
-		virtual PinType getType() const override = 0;
-		virtual PinType getLoc() const override = 0;
 
-		virtual bool isLinkable(IPin *link) const override;
+		virtual Tristate getStatus() const override;
+		virtual void setStatus(Tristate status) override;
 
 		virtual IPin *getLink() const override;
+		virtual bool link(IPin *pin, bool inComponent) override;
+		virtual bool isLinkable(IPin *link) const override;
+
 	protected:
 		IPin *_link;
 		Tristate _status;

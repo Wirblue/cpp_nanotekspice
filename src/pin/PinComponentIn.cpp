@@ -17,14 +17,18 @@ nts::PinComponentIn::~PinComponentIn()
 {
 }
 
-nts::Tristate nts::PinComponentIn::getStatus() const
-{
-	if (!_link)
-		return UNDEFINED;
-	return _link->getStatus();
-}
-
 nts::PinType nts::PinComponentIn::getType() const
 {
 	return IN;
+}
+
+nts::Tristate nts::PinComponentIn::compute()
+{
+	if (!_link)
+		_status = nts::UNDEFINED;
+	else {
+		_link->compute();
+		_status = _link->getStatus();
+	}
+	return _status;
 }

@@ -6,8 +6,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -std=c++17")
 include_directories(include)
 
 set(SOURCE_FILES
-        src/IComponent.hpp
-        src/IPin.hpp
+        src/components/IComponent.hpp
+        src/pin/IPin.hpp
         src/pin/APin.cpp
         src/pin/APin.hpp
         src/pin/APinExt.cpp
@@ -58,12 +58,12 @@ set(SOURCE_FILES
         src/components/gates/AGate.hpp
         src/components/Component4069.cpp
         src/components/Component4069.hpp
-        src/components/gates/ComponentFF.cpp
-        src/components/gates/ComponentFF.hpp
+        src/components/ComponentFF.cpp
+        src/components/ComponentFF.hpp
         src/components/Component4013.cpp
         src/components/Component4013.hpp
         src/components/Component4017.cpp
-        src/components/Component4017.hpp)
+        src/components/Component4017.hpp src/components/Component4040.cpp src/components/Component4040.hpp)
 
 add_executable(nanotekspice
         src/main.cpp

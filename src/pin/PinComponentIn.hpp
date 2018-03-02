@@ -16,8 +16,9 @@ namespace nts {
 		PinComponentIn(IComponent *component = nullptr);
 		~PinComponentIn();
 
-		virtual Tristate getStatus() const override;
 		virtual PinType getType() const override;
+
+		virtual Tristate compute() override;
 	};
 }
 

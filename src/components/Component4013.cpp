@@ -5,6 +5,7 @@
 // Component4013.cpp
 //
 
+#include <iostream>
 #include "Component4013.hpp"
 
 nts::Component4013::Component4013(std::string name):
@@ -39,16 +40,16 @@ nts::IComponent *nts::Component4013::clone(std::string name) const
 
 void nts::Component4013::execute()
 {
-	if (_alreayDone)
-		return;
-	for (auto gate : _ffGate)
-		gate.execute();
+	//if (_alreayDone)
+	//	return;
+	//for (auto gate : _ffGate)
+	_ffGate->execute();
 	AComponent::execute();
 }
 
 void nts::Component4013::reset()
 {
-	AComponent::reset();
 	for (auto gate : _ffGate)
 		gate.reset();
+	AComponent::reset();
 }

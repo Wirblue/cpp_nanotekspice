@@ -14,16 +14,16 @@
 namespace nts {
 	class APinExt : public APin {
 	public:
-		APinExt(std::string name);
-		~APinExt();
+		APinExt(std::string name = "");
+		virtual ~APinExt() = default;
 
 		void setName(std::string name);
-		std::string &getName();
+		std::string getName();
 
 		virtual PinType getLoc() const override;
 
 	protected:
-		std::string &_name;
+		std::string _name;
 	};
 }
 

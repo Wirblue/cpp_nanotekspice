@@ -16,10 +16,9 @@ namespace nts {
 		PinOutput(std::string name);
 		~PinOutput();
 
-		virtual Tristate getStatus() const override;
-
-
 		virtual PinType getType() const override;
+
+		virtual Tristate compute() override;
 	};
 }
 

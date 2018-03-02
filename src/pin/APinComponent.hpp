@@ -14,6 +14,7 @@ namespace nts {
 	class APinComponent : public APin {
 	public:
 		APinComponent(IComponent *gate = nullptr);
+		virtual ~APinComponent() = default;
 
 		virtual PinType getLoc() const override;
 

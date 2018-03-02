@@ -8,8 +8,8 @@
 #ifndef CPP_NANOTEKSPICE_COMPONENTFF_HPP
 #define CPP_NANOTEKSPICE_COMPONENTFF_HPP
 
-#include "AGate.hpp"
-#include "ComponentNOR.hpp"
+#include "gates/AGate.hpp"
+#include "gates/ComponentNOR.hpp"
 
 namespace nts {
 	class ComponentFF : public AGate {
@@ -21,7 +21,9 @@ namespace nts {
 		virtual void execute() override;
 
 	private:
-		Tristate memory = UNDEFINED;
+		Tristate _memory = UNDEFINED;
+		Tristate _reset = UNDEFINED;
+		Tristate _lastState = UNDEFINED;
 	};
 }
 

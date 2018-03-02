@@ -14,7 +14,7 @@ namespace nts {
 	class AGate : public AComponent {
 	public:
 		AGate(std::string name, size_t size);
-		~AGate();
+		virtual ~AGate() = default;
 
 		void linkPin(std::vector<IPin *> pin);
 	};

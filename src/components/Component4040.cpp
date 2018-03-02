@@ -2,15 +2,15 @@
 // EPITECH PROJECT, 2018
 // cpp_nanotekspice
 // File description:
-// Component4017.cpp
+// Component4040.cpp
 //
 
 #include <iostream>
-#include "Component4017.hpp"
+#include "Component4040.hpp"
 
-const std::vector<int> pinOrder = {3, 2, 4, 7, 10, 1, 5, 6, 9, 11};
+const std::vector<size_t> pinOrder = {9, 7, 6, 5, 3, 2, 4, 13, 12, 14, 15, 1};
 
-nts::Component4017::Component4017(std::string name):
+nts::Component4040::Component4040(std::string name):
 	AComponent(name, 16)
 {
 	_pin.push_back(new PinComponentOut(this));
@@ -22,46 +22,43 @@ nts::Component4017::Component4017(std::string name):
 	_pin.push_back(new PinComponentOut(this));
 	_pin.push_back(new PinComponentOut(this));
 	_pin.push_back(new PinComponentOut(this));
+	_pin.push_back(new PinComponentIn(this));
+	_pin.push_back(new PinComponentIn(this));
 	_pin.push_back(new PinComponentOut(this));
 	_pin.push_back(new PinComponentOut(this));
 	_pin.push_back(new PinComponentOut(this));
-	_pin.push_back(new PinComponentIn(this));
-	_pin.push_back(new PinComponentIn(this));
-	_pin.push_back(new PinComponentIn(this));
+	_pin.push_back(new PinComponentOut(this));
 	_pin.push_back(new PinComponentOut(this));
 }
 
-nts::Component4017::~Component4017()
+nts::Component4040::~Component4040()
 {
 }
 
-nts::IComponent *nts::Component4017::clone(std::string name) const
+nts::IComponent *nts::Component4040::clone(std::string name) const
 {
-	return new Component4017(name);
+	return new Component4040(name);
 }
 
-void nts::Component4017::openOnlyOne(size_t open)
+void nts::Component4040::printPinBinary()
 {
 	for (size_t i = 0; i < pinOrder.size(); i++) {
-		if (i == open)
+		if ((_av & (1 << i)))
 			_pin[pinOrder[i] - 1]->setStatus(nts::TRUE);
 		else
 			_pin[pinOrder[i] - 1]->setStatus(nts::FALSE);
 	}
 }
 
-void nts::Component4017::execute()
+void nts::Component4040::execute()
 {
 	if (_alreayDone)
 		return;
-	if (_pin[14]->compute() == nts::TRUE)
-		_av = 0;
-	else if (_pin[13]->compute() == nts::TRUE && _lastState != nts::TRUE
-		&& _pin[12]->compute() != nts::TRUE)
-		_av++;
-	_av = _av % pinOrder.size();
-	_lastState = _pin[13]->getStatus();
-	openOnlyOne(_av);
-	_pin[11]->setStatus(_av >= pinOrder.size() / 2 ? nts::FALSE : nts::TRUE);
 	AComponent::execute();
+	if (_pin[10]->compute() == nts::TRUE)
+		_av = 0;
+	else if (_pin[9]->compute() == nts::TRUE && _lastState != nts::TRUE)
+		_av++;
+	_lastState = _pin[9]->getStatus();
+	printPinBinary();
 }

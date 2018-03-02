@@ -11,8 +11,8 @@
 #include <string>
 #include <vector>
 #include <map>
-#include "IPin.hpp"
-#include "IComponent.hpp"
+#include "pin/IPin.hpp"
+#include "components/IComponent.hpp"
 #include "pin/PinInput.hpp"
 #include "pin/PinOutput.hpp"
 

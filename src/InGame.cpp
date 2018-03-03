@@ -80,7 +80,7 @@ void nts::InGame::displayInput()
 
 void nts::InGame::input()
 {
-	if (!_circuit.setInputFromText(_lastLine))
+	if (!_circuit.setInputFromText(_lastLine, false))
 		std::cout << "Error: Command not found" << std::endl;
 }
 

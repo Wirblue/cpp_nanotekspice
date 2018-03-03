@@ -54,7 +54,7 @@ bool nts::Parser::readDefault(std::ifstream &file, nts::Parser::readType &status
 
 	if (!getline(file, line))
 		throw nts::NtsException("Can't read file.",
-			std::__cxx11::string());
+			std::string());
 	if (line == ".chipsets:")
 		status = CHIPSETS;
 	return true;
@@ -124,7 +124,7 @@ bool nts::Parser::addInputValue(char **av)
 	bool status = true;
 
 	for (int i = 0; av[i]; i++)
-		if (!_circuit.setInputFromText(av[i]))
+		if (!_circuit.setInputFromText(av[i], true))
 			status = false;
 	return status;
 }

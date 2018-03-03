@@ -31,10 +31,6 @@ nts::Component4040::Component4040(std::string name):
 	_pin.push_back(new PinComponentOut(this));
 }
 
-nts::Component4040::~Component4040()
-{
-}
-
 nts::IComponent *nts::Component4040::clone(std::string name) const
 {
 	return new Component4040(name);
@@ -54,10 +50,11 @@ void nts::Component4040::execute()
 {
 	if (!tryExecution())
 		return;
-	if (_pin[10]->compute() == nts::TRUE)
+	if (_pin[10]->getStatus() == nts::TRUE)
 		_av = 0;
-	else if (_pin[9]->compute() == nts::TRUE && _lastState != nts::TRUE)
+	else if (_pin[9]->compute() == nts::FALSE && _lastState == nts::TRUE)
 		_av++;
-	_lastState = _pin[9]->getStatus();
+	_av %= 4096;
 	printPinBinary();
+	_lastState = _pin[9]->getStatus();
 }

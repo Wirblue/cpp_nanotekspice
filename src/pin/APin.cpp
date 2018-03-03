@@ -59,10 +59,8 @@ bool nts::APin::link(IPin *pin, bool inComponent)
 		_link = pin;
 	else if (pin->isLinkable(this))
 		return pin->link(this, false);
-	else {
-		std::cout << "Invalid Connection" << std::endl;
+	else
 		return false;
-	}
 	return true;
 }
 
@@ -71,7 +69,7 @@ bool nts::APin::isLinkable(IPin *link) const
 	if (!link)
 		return false;
 
-	if (getLoc() == nts::OUT && getType() == nts::IN) {
+	if (getLoc() != getType()) {
 		return false;
 	}
 	bool a2 = getType() == link->getType();

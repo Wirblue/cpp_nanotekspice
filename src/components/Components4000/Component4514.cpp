@@ -35,6 +35,7 @@ nts::Component4514::Component4514(std::string name):
 	_pin.push_back(new PinComponentIn(this));
 	_pin.push_back(new PinComponentIn(this));
 	_pin.push_back(new PinComponentIn(this));
+	_pin.push_back(new PinComponentOut(this));
 }
 
 nts::IComponent *nts::Component4514::clone(std::string name) const
@@ -56,7 +57,7 @@ void nts::Component4514::execute()
 			+ (_pin[20]->compute() == nts::TRUE ? 1 : 0) * 4
 			+ (_pin[21]->compute() == nts::TRUE ? 1 : 0) * 8;
 	if (_pin[22]->compute() == nts::TRUE)
-		output(0);
+		output(-1);
 	else
-		output(0);
+		output(_value);
 }

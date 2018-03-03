@@ -44,7 +44,7 @@ bool nts::Circuit::addInput(std::string name)
 
 bool nts::Circuit::addClock(std::string name)
 {
-	PinInput *newClock = new PinInput(name, nts::FALSE);
+	PinInput *newClock = new PinInput(name, nts::TRUE);
 
 	if (alreadyExist(name))
 		throw nts::NtsException("Name already used for a component",
@@ -93,9 +93,10 @@ bool nts::Circuit::linkComponent(std::string name1, size_t pin1,
 		throw nts::NtsException("Pin not found", name1);
 	if (b == nullptr)
 		throw nts::NtsException("Pin not found", name2);
-	return a->link(b, false);
+	if (!(a->link(b, false)))
+		throw nts::NtsException("Invalid Link", name2);
+	return true;
 }
-
 
 void nts::Circuit::dump()
 {
@@ -135,15 +136,19 @@ void nts::Circuit::displayInput()
 	}
 }
 
-bool nts::Circuit::setInput(std::string name, nts::Tristate status)
+bool nts::Circuit::setInput(std::string name, nts::Tristate status,
+	bool allowClocks)
 {
-	if (_input.find(name.c_str()) == _input.end())
+	if (_input.find(name.c_str()) != _input.end())
+		_input[name]->setStatus(status);
+	else if (allowClocks && _clock.find(name.c_str()) != _clock.end())
+		_clock[name]->setStatus(!status);
+	else
 		throw nts::NtsException("Invalid Input", name);
-	_input[name]->setStatus(status);
 	return true;
 }
 
-bool nts::Circuit::setInputFromText(std::string text)
+bool nts::Circuit::setInputFromText(std::string text, bool allowClocks)
 {
 	size_t apos = text.find('=');
 	std::string name1;
@@ -158,7 +163,7 @@ bool nts::Circuit::setInputFromText(std::string text)
 		value = nts::UNDEFINED;
 	else
 		return false;
-	setInput(name1, value);
+	setInput(name1, value, allowClocks);
 	return true;
 }
 

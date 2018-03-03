@@ -21,7 +21,7 @@ namespace nts {
 
 	private:
 		void output(int val);
-		int _value;
+		int _value = -1;
 	};
 }
 

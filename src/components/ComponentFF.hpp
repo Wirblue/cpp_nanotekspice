@@ -21,7 +21,10 @@ namespace nts {
 		virtual void execute() override;
 
 	private:
-		Tristate _memory = FALSE;
+		void setOutput(Tristate a, Tristate b);
+		Tristate haveChange();
+
+		Tristate _memory = UNDEFINED;
 		Tristate _reset = UNDEFINED;
 		Tristate _lastState = UNDEFINED;
 	};

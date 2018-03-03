@@ -14,7 +14,7 @@ namespace nts {
 	class Component4040 : public AComponent {
 	public:
 		Component4040(std::string name = "");
-		~Component4040();
+		~Component4040() = default;
 
 		virtual IComponent *clone(std::string name) const override;
 		virtual void execute() override;

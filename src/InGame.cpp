@@ -12,8 +12,6 @@
 #include "Circuit.hpp"
 #include "InGame.hpp"
 #include "exception/NtsException.hpp"
-#include "exception/NtsException.hpp"
-
 
 static void baseSigint(int i[[maybe_unused]])
 {
@@ -29,14 +27,14 @@ static void loopSiging(int i[[maybe_unused]])
 
 namespace nts {
 	std::map<std::string, nts::command_t> commandList {
-		{"display", &InGame::displayOutput},
-		{"output", &InGame::displayOutput},
-		{"input", &InGame::displayInput},
-		{"simulate", &InGame::simulate},
-		{"loop", &InGame::loop},
-		{"dump", &InGame::dump},
-		{"clocks", &InGame::clocks},
-		{"reset", &InGame::reset},
+		{"display", &InGame::circuitDisplayOutput},
+		{"output", &InGame::circuitDisplayOutput},
+		{"input", &InGame::circuitDisplayInput},
+		{"simulate", &InGame::circuitSimulate},
+		{"loop", &InGame::circuitLoop},
+		{"dump", &InGame::circuitDump},
+		{"clocks", &InGame::circuitClocks},
+		{"reset", &InGame::circuitReset},
 	};
 }
 
@@ -48,8 +46,6 @@ nts::InGame::InGame(Circuit &circuit):
 
 void nts::InGame::start()
 {
-	if (!_circuit.checkInput() || !_circuit.checkOutput())
-		throw nts::NtsException("Invalid Input or Output", "Circuit");
 	_circuit.simulate();
 	_circuit.displayOutput();
 	signal(SIGINT, &(baseSigint));
@@ -60,36 +56,52 @@ void nts::InGame::start()
 void nts::InGame::mainLoop()
 {
 	while (getline(std::cin, _lastLine) && _lastLine != "exit") {
-		if (nts::commandList.find(_lastLine.c_str()) != nts::commandList.end())
-			(*this.*(nts::commandList[_lastLine]))();
-		else
-			input();
+		try {
+			if (!_lastLine.empty())
+				parseCommand();
+		} catch (const nts::NtsException &e) {
+			std::cerr << "Shell: " <<  e.what() << std::endl;
+		}
 		std::cout << "> ";
 	}
 }
 
-void nts::InGame::displayOutput()
+void nts::InGame::parseCommand()
+{
+	if (nts::commandList.find(_lastLine.c_str()) != nts::commandList.end())
+		(*this.*(nts::commandList[_lastLine]))();
+	else if (isInput())
+		circuitSetInput();
+	else
+		throw nts::NtsException("Command not found", _lastLine);
+}
+
+bool nts::InGame::isInput()
+{
+	return _lastLine.find('=') < _lastLine.length();
+}
+
+void nts::InGame::circuitDisplayOutput()
 {
 	_circuit.displayOutput();
 }
 
-void nts::InGame::displayInput()
+void nts::InGame::circuitDisplayInput()
 {
 	_circuit.displayInput();
 }
 
-void nts::InGame::input()
+void nts::InGame::circuitSetInput()
 {
-	if (!_circuit.setInputFromText(_lastLine, false))
-		std::cout << "Error: Command not found" << std::endl;
+	_circuit.setInputFromText(_lastLine, false);
 }
 
-void nts::InGame::simulate()
+void nts::InGame::circuitSimulate()
 {
 	_circuit.simulate();
 }
 
-void nts::InGame::loop()
+void nts::InGame::circuitLoop()
 {
 	int i = 0;
 	signal(SIGINT, &(loopSiging));
@@ -100,17 +112,17 @@ void nts::InGame::loop()
 	signal(SIGINT, &(baseSigint));
 }
 
-void nts::InGame::dump()
+void nts::InGame::circuitDump()
 {
 	_circuit.dump();
 }
 
-void nts::InGame::clocks()
+void nts::InGame::circuitClocks()
 {
 	_circuit.clocks();
 }
 
-void nts::InGame::reset()
+void nts::InGame::circuitReset()
 {
 	_circuit.reset();
 }

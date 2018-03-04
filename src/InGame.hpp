@@ -17,16 +17,19 @@ namespace nts {
 
 		void start();
 
-		void displayInput();
-		void displayOutput();
-		void input();
-		void simulate();
-		void loop();
-		void dump();
-		void clocks();
-		void reset();
+		void parseCommand();
+
+		void circuitDisplayInput();
+		void circuitDisplayOutput();
+		void circuitSetInput();
+		void circuitSimulate();
+		void circuitLoop();
+		void circuitDump();
+		void circuitClocks();
+		void circuitReset();
 
 	private:
+		bool isInput();
 		void mainLoop();
 
 		std::string _lastLine;

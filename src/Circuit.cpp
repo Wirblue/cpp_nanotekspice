@@ -144,7 +144,7 @@ bool nts::Circuit::setInput(std::string name, nts::Tristate status,
 	else if (allowClocks && _clock.find(name.c_str()) != _clock.end())
 		_clock[name]->setStatus(!status);
 	else
-		throw nts::NtsException("Invalid Input", name);
+		throw nts::NtsException("Input not found", name);
 	return true;
 }
 
@@ -152,7 +152,7 @@ bool nts::Circuit::setInputFromText(std::string text, bool allowClocks)
 {
 	size_t apos = text.find('=');
 	std::string name1;
-	nts::Tristate value = nts::UNDEFINED;
+	nts::Tristate value;
 
 	name1 = text.substr(0, apos);
 	if (text.substr(apos + 1) == "1")
@@ -162,7 +162,7 @@ bool nts::Circuit::setInputFromText(std::string text, bool allowClocks)
 	else if (text.substr(apos + 1) == "U")
 		value = nts::UNDEFINED;
 	else
-		return false;
+		throw NtsException("Invalid Statement", text);
 	setInput(name1, value, allowClocks);
 	return true;
 }

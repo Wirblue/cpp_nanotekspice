@@ -53,8 +53,7 @@ bool nts::Parser::readDefault(std::ifstream &file, nts::Parser::readType &status
 	std::string line;
 
 	if (!getline(file, line))
-		throw nts::NtsException("Can't read file.",
-			std::string());
+		throw nts::NtsException("Can't read file");
 	if (line == ".chipsets:")
 		status = CHIPSETS;
 	return true;
@@ -90,14 +89,12 @@ bool nts::Parser::readLinks(std::ifstream &file)
 	return true;
 }
 
-bool nts::Parser::createCircuitFromFile(std::string fname)
+void nts::Parser::parseFile(std::ifstream &file)
 {
-	std::ifstream file;
 	readType status = NONE;
 
-	file.open(fname);
 	if (!file)
-		throw nts::NtsException("Invalid File", fname);
+		throw nts::NtsException("Invalid File");
 	while (!file.eof()) {
 		switch (status) {
 		case LINKS:
@@ -111,11 +108,33 @@ bool nts::Parser::createCircuitFromFile(std::string fname)
 			break;
 		}
 	}
-	file.close();
 	if (status == NONE)
-		throw nts::NtsException("Missing .chipsets section", fname);
+		throw nts::NtsException("Missing .chipsets section");
 	else if (status == CHIPSETS)
-		throw nts::NtsException("Missing .links section", fname);
+		throw nts::NtsException("Missing .links section");
+}
+
+
+bool nts::Parser::createCircuitFromFile(std::string fname, char **statement)
+{
+	std::ifstream file;
+
+	try {
+		file.open(fname);
+		parseFile(file);
+		file.close();
+		addInputValue(statement);
+	} catch (nts::NtsException &e) {
+		std::cerr << fname << ": " << e.what() << std::endl;
+		return false;
+	}
+	return true;
+}
+
+bool nts::Parser::checkInputOutput()
+{
+	if (!_circuit.checkInput() || !_circuit.checkOutput())
+		throw nts::NtsException("Invalid Input or Output", "Circuit");
 	return true;
 }
 
@@ -126,6 +145,7 @@ bool nts::Parser::addInputValue(char **av)
 	for (int i = 0; av[i]; i++)
 		if (!_circuit.setInputFromText(av[i], true))
 			throw nts::NtsException("Invalid Input", av[i]);
+	checkInputOutput();
 	return status;
 }
 

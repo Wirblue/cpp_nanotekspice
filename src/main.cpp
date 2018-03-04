@@ -22,18 +22,12 @@
 int main(int ac[[maybe_unused]], char **av)
 {
 	nts::Parser parser;
+	nts::InGame game(parser.getCircuit());
 
-	try {
-		if (ac <= 1)
-			throw nts::NtsException("No Such File", "nanotekspice");
-		if (!parser.createCircuitFromFile(av[1]))
-			return false;
-		parser.addInputValue(av + 2);
-		nts::InGame game(parser.getCircuit());
-		game.start();
-	} catch (const nts::NtsException &e) {
-		std::cerr << e.what() << std::endl;
+	if (ac <= 1)
+		throw nts::NtsException("No Such File", "nanotekspice");
+	if (!parser.createCircuitFromFile(av[1], av + 2))
 		return 84;
-	};
+	game.start();
 	return 0;
 }

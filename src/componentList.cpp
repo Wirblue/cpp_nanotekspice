@@ -15,6 +15,8 @@
 #include "components/Components4000/Component4040.hpp"
 #include "components/Components4000/Component4503.hpp"
 #include "components/Components4000/Component4514.hpp"
+#include "components/Components4000/Component4008.hpp"
+#include "components/Components4000/Component4094.hpp"
 #include <map>
 
 namespace nts {
@@ -22,6 +24,7 @@ namespace nts {
 		{"true", new ComponentTrue()},
 		{"false", new ComponentFalse()},
 		{"4001", new Component4001()},
+		{"4008", new Component4008()},
 		{"4011", new Component4011()},
 		{"4013", new Component4013()},
 		{"4017", new Component4017()},
@@ -30,6 +33,7 @@ namespace nts {
 		{"4069", new Component4069()},
 		{"4071", new Component4071()},
 		{"4081", new Component4081()},
+		{"4094", new Component4094()},
 		{"4503", new Component4503()},
 		{"4514", new Component4514()}
 	};

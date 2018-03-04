@@ -125,7 +125,7 @@ bool nts::Parser::addInputValue(char **av)
 
 	for (int i = 0; av[i]; i++)
 		if (!_circuit.setInputFromText(av[i], true))
-			status = false;
+			throw nts::NtsException("Invalid Input", av[i]);
 	return status;
 }
 

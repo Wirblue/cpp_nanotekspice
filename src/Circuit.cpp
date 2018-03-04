@@ -94,7 +94,7 @@ bool nts::Circuit::linkComponent(std::string name1, size_t pin1,
 	if (b == nullptr)
 		throw nts::NtsException("Pin not found", name2);
 	if (!(a->link(b, false)))
-		throw nts::NtsException("Invalid Link", name2);
+		throw nts::NtsException("Invalid Link", name1 + " " + name2);
 	return true;
 }
 

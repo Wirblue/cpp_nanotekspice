@@ -37,6 +37,9 @@ SRC	=   src/pin/APin.cpp    \
                 src/components/Components4000/Component4040.cpp \
                 src/components/Components4000/Component4503.cpp \
                 src/components/Components4000/Component4514.cpp \
+                src/components/Components4000/Component4008.cpp \
+                src/components/Components4000/Component4094.cpp \
+                src/other/ClockManager.cpp  \
                 src/main.cpp
 
 OBJ	=	${SRC:.cpp=.o}

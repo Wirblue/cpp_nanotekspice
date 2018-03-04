@@ -29,11 +29,10 @@ int main(int ac[[maybe_unused]], char **av)
 		if (!parser.createCircuitFromFile(av[1]))
 			return false;
 		parser.addInputValue(av + 2);
-
-		nts::Circuit &circuit = parser.getCircuit();
-		nts::InGame game(circuit);
+		nts::InGame game(parser.getCircuit());
 		game.start();
 	} catch (const nts::NtsException &e) {
+		std::cerr << e.what() << std::endl;
 		return 84;
 	};
 	return 0;

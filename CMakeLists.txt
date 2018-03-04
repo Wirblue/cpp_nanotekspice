@@ -69,7 +69,13 @@ set(SOURCE_FILES
         src/components/Components4000/Component4503.cpp
         src/components/Components4000/Component4503.hpp
         src/components/Components4000/Component4514.cpp
-        src/components/Components4000/Component4514.hpp)
+        src/components/Components4000/Component4514.hpp
+        src/components/Components4000/Component4008.cpp
+        src/components/Components4000/Component4008.hpp
+        src/components/Components4000/Component4094.cpp
+        src/components/Components4000/Component4094.hpp
+        src/other/ClockManager.cpp
+        src/other/ClockManager.hpp src/components/Components4000/Component4094.hpp)
 
 add_executable(nanotekspice
         src/main.cpp

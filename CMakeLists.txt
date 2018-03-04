@@ -78,6 +78,16 @@ set(SOURCE_FILES
         src/pin/PinOutput.cpp
         src/pin/PinOutput.hpp)
 
+
 add_executable(nanotekspice
         src/main.cpp
         ${SOURCE_FILES})
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+
+find_package(Qt5Widgets)
+
+add_executable(helloworld WIN32 src/main.cpp ${SOURCE_FILE})
+
+target_link_libraries(helloworld Qt5::Widgets)

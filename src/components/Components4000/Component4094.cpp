@@ -36,7 +36,7 @@ nts::IComponent *nts::Component4094::clone(std::string name) const
 	return new Component4094(name);
 }
 
-void nts::Component4094::setAllQPin(nts::Tristate a)
+void nts::Component4094::setAllQPin()
 {
 	size_t k = 0;
 	_nbTrue++;
@@ -65,7 +65,7 @@ void nts::Component4094::execute()
 		if (!_pin[14]->compute())
 			setDefQPin(UNDEFINED);
 		else if (_pin[0]->compute() == nts::TRUE)
-			setAllQPin(_pin[1]->compute());
+			setAllQPin();
 		_pin[8]->setStatus(_nbTrue > 7 ? TRUE : FALSE);
 	} else if (_clock.getStatus() == nts::ClockManager::MOVE_DOWN) {
 		if (!_pin[0]->compute() || (_pin[1]->compute() && _pin[0]->compute()))

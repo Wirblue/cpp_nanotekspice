@@ -21,7 +21,7 @@ namespace nts {
 		virtual void execute() override;
 
 	private:
-		void setAllQPin(nts::Tristate a);
+		void setAllQPin();
 		void setDefQPin(nts::Tristate a);
 		ClockManager _clock;
 		size_t _nbTrue;

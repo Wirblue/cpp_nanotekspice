@@ -54,13 +54,13 @@ void nts::Component4017::execute()
 {
 	if (!tryExecution())
 		return;
+	_clock.move(_pin[13]->compute());
 	if (_pin[14]->compute() == nts::TRUE)
 		_av = 0;
-	else if (_pin[13]->compute() == nts::TRUE && _lastState != nts::TRUE
+	else if (_clock.getStatus() == nts::ClockManager::MOVE_UP
 		&& _pin[12]->compute() != nts::TRUE)
 		_av++;
 	_av = _av % pinOrder.size();
-	_lastState = _pin[13]->getStatus();
 	openOnlyOne(_av);
 	_pin[11]->setStatus(_av >= pinOrder.size() / 2 ? nts::FALSE : nts::TRUE);
 }

@@ -9,6 +9,7 @@
 #define CPP_NANOTEKSPICE_COMPONENT4040_HPP
 
 #include "../AComponent.hpp"
+#include "../../other/ClockManager.hpp"
 
 namespace nts {
 	class Component4040 : public AComponent {
@@ -22,6 +23,7 @@ namespace nts {
 	private:
 		void printPinBinary();
 
+		ClockManager _clock;
 		nts::Tristate _lastState = nts::UNDEFINED;
 		size_t _av = 0;
 	};

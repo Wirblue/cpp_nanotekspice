@@ -50,9 +50,10 @@ void nts::Component4040::execute()
 {
 	if (!tryExecution())
 		return;
+	_clock.move(_pin[9]->compute());
 	if (_pin[10]->getStatus() == nts::TRUE)
 		_av = 0;
-	else if (_pin[9]->compute() == nts::FALSE && _lastState == nts::TRUE)
+	else if (_clock.getStatus() == nts::ClockManager::MOVE_DOWN)
 		_av++;
 	_av %= 4096;
 	printPinBinary();

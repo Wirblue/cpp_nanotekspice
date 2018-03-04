@@ -22,7 +22,9 @@ namespace nts {
 
 	private:
 		void setAllQPin(nts::Tristate a);
+		void setDefQPin(nts::Tristate a);
 		ClockManager _clock;
+		size_t _nbTrue;
 	};
 }
 

@@ -19,10 +19,12 @@ nts::ClockManager::Status nts::ClockManager::getStatus() const
 
 nts::ClockManager::Status nts::ClockManager::move(nts::Tristate currentCall)
 {
-	if (currentCall == _lastCall)
-		_lastStatus = currentCall ? STATIC_UP : STATIC_DOWN;
-	else
-		_lastStatus = currentCall ? MOVE_UP : MOVE_DOWN;
+	if (_lastCall != nts::UNDEFINED) {
+		if (currentCall == _lastCall)
+			_lastStatus = currentCall ? STATIC_UP : STATIC_DOWN;
+		else
+			_lastStatus = currentCall ? MOVE_UP : MOVE_DOWN;
+	}
 	_lastCall = currentCall;
 	return _lastStatus;
 }

@@ -9,6 +9,7 @@
 #define CPP_NANOTEKSPICE_COMPONENT4017_HPP
 
 #include "../AComponent.hpp"
+#include "../../other/ClockManager.hpp"
 
 namespace nts {
 	class Component4017 : public AComponent {
@@ -21,7 +22,7 @@ namespace nts {
 	private:
 		void openOnlyOne(size_t i);
 		size_t _av = 0;
-		nts::Tristate _lastState = nts::UNDEFINED;
+		nts::ClockManager _clock;
 	};
 }
 

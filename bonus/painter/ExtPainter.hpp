@@ -8,7 +8,7 @@
 #ifndef CPP_NANOTEKSPICE_EXTPAINTER_HPP
 #define CPP_NANOTEKSPICE_EXTPAINTER_HPP
 
-#include "PinPainter.hpp"
+#include "bonus/painter/PinPainter.hpp"
 
 namespace ntsDraw {
 	class ExtPainter : public PinPainter {

@@ -92,9 +92,9 @@ add_executable(nanotekspice-bonus WIN32
         bonus/main.cpp
         bonus/CircuitWidget.cpp
         bonus/CircuitWidget.hpp
-        bonus/PinPainter.cpp
-        bonus/PinPainter.hpp
+        bonus/painter/PinPainter.cpp
+        bonus/painter/PinPainter.hpp
         bonus/NtsWindow.cpp
-        bonus/NtsWindow.hpp bonus/InputPainter.cpp bonus/InputPainter.hpp bonus/ExtPainter.cpp bonus/ExtPainter.hpp)
+        bonus/NtsWindow.hpp bonus/painter/InputPainter.cpp bonus/painter/InputPainter.hpp bonus/painter/ExtPainter.cpp bonus/painter/ExtPainter.hpp bonus/painter/LinkPainter.cpp bonus/painter/LinkPainter.hpp)
 
 target_link_libraries(nanotekspice-bonus Qt5::Widgets)

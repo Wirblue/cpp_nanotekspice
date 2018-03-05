@@ -14,16 +14,19 @@
 
 namespace ntsDraw {
 	class NtsWindow : public QMainWindow {
-		Q_OBJECT
+	Q_OBJECT
 	public:
 		NtsWindow(nts::Circuit &circuit);
 		~NtsWindow() = default;
 
 	private slots:
 		void simulate();
+		void loop();
 
 	private:
+		void keyPressEvent(QKeyEvent *event) override;
 		CircuitWidget *_circuitWidget;
+		QTimer *_timer;
 	};
 }
 

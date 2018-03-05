@@ -7,7 +7,7 @@
 
 #include "InputPainter.hpp"
 
-ntsDraw::InputPainter::InputPainter(QWidget *parent, nts::APinExt *pin):
+ntsDraw::InputPainter::InputPainter(QWidget *parent, nts::APinExt *pin) :
 	ExtPainter(parent, pin)
 {
 	QObject::connect(this, SIGNAL(clicked()), this, SLOT(changeStatus()));

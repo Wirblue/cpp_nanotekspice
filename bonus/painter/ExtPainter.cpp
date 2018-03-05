@@ -7,10 +7,10 @@
 
 #include <QPainter>
 #include <iostream>
-#include "../src/pin/APinExt.hpp"
+#include "src/pin/APinExt.hpp"
 #include "ExtPainter.hpp"
 
-ntsDraw::ExtPainter::ExtPainter(QWidget *parent, nts::APinExt *pin):
+ntsDraw::ExtPainter::ExtPainter(QWidget *parent, nts::APinExt *pin) :
 	PinPainter(parent, pin), _pinExt(pin)
 {
 }

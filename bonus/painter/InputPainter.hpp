@@ -11,7 +11,7 @@
 #include <QWidget>
 #include <QtWidgets/QPushButton>
 #include <src/pin/APinExt.hpp>
-#include "PinPainter.hpp"
+#include "bonus/painter/PinPainter.hpp"
 #include "ExtPainter.hpp"
 
 namespace ntsDraw {

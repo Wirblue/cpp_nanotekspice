@@ -43,6 +43,11 @@ namespace nts {
 		bool checkOutput();
 		bool checkInput();
 
+		std::map<std::string, PinInput *> getInput() const;
+		std::map<std::string, PinInput *> getClock() const;
+		std::map<std::string, IComponent *> getComponent() const;
+		std::map<std::string, PinOutput *> getOutput() const;
+
 	private:
 		bool alreadyExist(std::string name);
 		IPin *findPin(std::string name, size_t pos);

@@ -28,6 +28,7 @@ namespace nts {
 
 		virtual void dump() const = 0;
 		virtual IPin *getPin(size_t pos) const = 0;
+		virtual size_t getNbPin() const = 0;
 
 		virtual void execute() = 0;
 		virtual bool tryExecution() = 0;

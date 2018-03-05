@@ -197,3 +197,23 @@ void nts::Circuit::clocks()
 		p.second->setStatus(!p.second->getStatus());
 	}
 }
+
+std::map<std::string, nts::PinInput *> nts::Circuit::getInput() const
+{
+	return _input;
+}
+
+std::map<std::string, nts::PinInput *> nts::Circuit::getClock() const
+{
+	return _clock;
+}
+
+std::map<std::string, nts::IComponent *> nts::Circuit::getComponent() const
+{
+	return _component;
+}
+
+std::map<std::string, nts::PinOutput *> nts::Circuit::getOutput() const
+{
+	return _output;
+}

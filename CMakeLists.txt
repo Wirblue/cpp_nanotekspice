@@ -78,7 +78,6 @@ set(SOURCE_FILES
         src/pin/PinOutput.cpp
         src/pin/PinOutput.hpp)
 
-
 add_executable(nanotekspice
         src/main.cpp
         ${SOURCE_FILES})
@@ -88,6 +87,12 @@ set(CMAKE_AUTOMOC ON)
 
 find_package(Qt5Widgets)
 
-add_executable(helloworld WIN32 src/main.cpp ${SOURCE_FILE})
+add_executable(nanotekspice-bonus WIN32
+        bonus/main.cpp
+        bonus/CircuitWidget.cpp
+        bonus/CircuitWidget.hpp
+        bonus/PinPainter.cpp
+        bonus/PinPainter.hpp
+        ${SOURCE_FILES} bonus/NtsWindow.cpp bonus/NtsWindow.hpp)
 
-target_link_libraries(helloworld Qt5::Widgets)
+target_link_libraries(nanotekspice-bonus Qt5::Widgets)

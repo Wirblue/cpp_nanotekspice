@@ -29,6 +29,10 @@ nts::IPin *nts::AComponent::getPin(size_t pos) const
 	return _pin[pos];
 }
 
+size_t nts::AComponent::getNbPin() const
+{
+	return _nbPin;
+}
 
 void nts::AComponent::reset()
 {

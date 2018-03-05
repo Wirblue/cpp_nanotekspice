@@ -32,6 +32,8 @@ namespace nts {
 			std::size_t otherPin) override;
 		virtual Tristate compute(size_t pin) override;
 
+		virtual size_t getNbPin() const override;
+
 	protected:
 		std::string _name;
 		std::vector<IPin *> _pin;

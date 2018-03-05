@@ -11,6 +11,7 @@
 #include <QtWidgets/QWidget>
 #include <src/Circuit.hpp>
 #include <QtCore/QVector>
+#include "PinPainter.hpp"
 
 namespace ntsDraw {
 	class CircuitWidget : public QWidget {
@@ -18,21 +19,17 @@ namespace ntsDraw {
 	public:
 		CircuitWidget(QWidget *parent, nts::Circuit &circuit);
 
-	public slots:
+		void init();
 		void simulate();
 
-	protected:
+	private:
 		void paintEvent(QPaintEvent *event) override;
 
-	private:
-		void printPin(QPainter &painter, QPoint pos, nts::IPin *pin);
-
-		void printInputs(QPainter &painter, size_t &start);
-		void printOuputs(QPainter &painter, size_t &start);
-		void printComponent(QPainter &painter, size_t &start,
-			nts::IComponent *component);
-
-		void printComponents(QPainter &painter, size_t &start);
+		void printPin(QPoint pos, PinPainter *);
+		void printInputs(size_t &start);
+		void printOuputs(size_t &start);
+		void printComponent(size_t &start, nts::IComponent *component);
+		void printComponents(size_t &start);
 
 		QPoint _pos;
 		QPoint _pinSize = QPoint(30, 30);

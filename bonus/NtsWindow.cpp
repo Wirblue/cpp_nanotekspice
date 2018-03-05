@@ -13,15 +13,22 @@
 ntsDraw::NtsWindow::NtsWindow(nts::Circuit &circuit):
 	QMainWindow()
 {
-	_circuitWidget = new CircuitWidget(this, circuit);
-	setFixedSize(1300, 700);
-
 	QPushButton *simulate = new QPushButton("Simulate", this);
-	QObject::connect(simulate, SIGNAL(released()), this, SLOT(simulate()));
+	QPushButton *loop = new QPushButton("Loop", this);
+	QPushButton *exit = new QPushButton("Quit", this);
+
+	simulate->setGeometry(100, 650, 300, 25);
+	loop->setGeometry(500, 650, 300, 25);
+	exit->setGeometry(900, 650, 300, 25);
+	_circuitWidget = new CircuitWidget(this, circuit);
+	_circuitWidget->init();
+	setFixedSize(1300, 700);
+	QObject::connect(exit, SIGNAL(clicked()), this, SLOT(close()));
+	QObject::connect(simulate, SIGNAL(clicked()), this, SLOT(simulate()));
 }
 
 void ntsDraw::NtsWindow::simulate()
 {
-	std::cout << "ALED" << std::endl;
 	_circuitWidget->simulate();
+	_circuitWidget->repaint();
 }

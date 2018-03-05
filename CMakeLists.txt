@@ -88,11 +88,13 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5Widgets)
 
 add_executable(nanotekspice-bonus WIN32
+        ${SOURCE_FILES}
         bonus/main.cpp
         bonus/CircuitWidget.cpp
         bonus/CircuitWidget.hpp
         bonus/PinPainter.cpp
         bonus/PinPainter.hpp
-        ${SOURCE_FILES} bonus/NtsWindow.cpp bonus/NtsWindow.hpp)
+        bonus/NtsWindow.cpp
+        bonus/NtsWindow.hpp bonus/InputPainter.cpp bonus/InputPainter.hpp bonus/ExtPainter.cpp bonus/ExtPainter.hpp)
 
 target_link_libraries(nanotekspice-bonus Qt5::Widgets)

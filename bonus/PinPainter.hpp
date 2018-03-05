@@ -10,14 +10,16 @@
 
 #include "../src/pin/IPin.hpp"
 #include <QWidget>
+#include <QtWidgets/QPushButton>
 
 namespace ntsDraw {
-	class PinPainter : public QWidget {
+	class PinPainter : public QPushButton {
+		Q_OBJECT
 	public:
 		PinPainter(QWidget *parent, nts::IPin *Pin = nullptr);
-		void draw();
 
-	private:
+	protected:
+		void paintEvent(QPaintEvent *event) override;
 		nts::IPin *_pin;
 	};
 }

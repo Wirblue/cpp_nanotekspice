@@ -11,85 +11,80 @@
 #include <QPaintEvent>
 #include <iostream>
 #include "CircuitWidget.hpp"
+#include "PinPainter.hpp"
+#include "InputPainter.hpp"
+#include "ExtPainter.hpp"
 
 ntsDraw::CircuitWidget::CircuitWidget(QWidget *parent, nts::Circuit &circuit) :
 	QWidget(parent), _circuit(circuit)
 {
 	setGeometry(25, 25, 1250, 600);
-	QPushButton *simulate = new QPushButton("Simulate", this);
-	QObject::connect(simulate, SIGNAL(released()), this, SLOT(simulate()));
+	//QPushButton *simulate = new QPushButton("Simulate", this);
+	//QObject::connect(simulate, SIGNAL(released()), this, SLOT(simulate()));
+}
+
+void ntsDraw::CircuitWidget::init()
+{
+	size_t i = 0;
+	printInputs(i);
+	printComponents(i);
+	printOuputs(i);
+	simulate();
 }
 
 void ntsDraw::CircuitWidget::paintEvent(QPaintEvent *event)
 {
-	Q_UNUSED(event);
-	QPainter paint;
-	size_t i = 0;
+	QPainter paint(this);
 
-	paint.begin(this);
+	Q_UNUSED(event);
 	paint.setRenderHint(QPainter::Antialiasing);
-	printInputs(paint, i);
-	printComponents(paint, i);
-	printOuputs(paint, i);
+	paint.drawRect(rect());
 	paint.end();
 }
 
-void ntsDraw::CircuitWidget::printPin(QPainter &painter, QPoint pos, nts::IPin *pin)
+void ntsDraw::CircuitWidget::printPin(QPoint pos, PinPainter *pinPainter)
 {
-	QRect start(pos.x() * _pinSize.x() - _pos.x(), pos.y() * _pinSize.y() - _pos.y(), _pinSize.x(), _pinSize.y());
-	QBrush color;
+	QRect start(pos.x() * _pinSize.x(), pos.y() * _pinSize.y(), _pinSize.x(), _pinSize.y());
 
-	switch (pin->getStatus()) {
-	case nts::UNDEFINED:
-		color = Qt::blue;
-		break;
-	case nts::FALSE:
-		color = Qt::red;
-		break;
-	case nts::TRUE:
-		color = Qt::green;
-		break;
-	}
-	painter.fillRect(start, color);
+	pinPainter->setGeometry(start);
 }
 
-void ntsDraw::CircuitWidget::printInputs(QPainter &painter, size_t &start)
+void ntsDraw::CircuitWidget::printInputs(size_t &start)
 {
 	auto pin = _circuit.getClock();
 	size_t i = 0;
 
 	for (auto p : pin) {
-		printPin(painter, QPoint(start, i * 2), p.second);
+		printPin(QPoint(start, i * 2), new ExtPainter(this, p.second));
 		i++;
 	}
 	pin = _circuit.getInput();
 	for (auto p : pin) {
-		printPin(painter, QPoint(start, i * 2), p.second);
+		printPin(QPoint(start, i * 2), new InputPainter(this, p.second));
 		i++;
 	}
 	start += 2;
 }
 
-void ntsDraw::CircuitWidget::printOuputs(QPainter &painter, size_t &start)
+void ntsDraw::CircuitWidget::printOuputs(size_t &start)
 {
 	auto pin = _circuit.getOutput();
 	size_t i = 0;
 
 	for (auto p : pin) {
-		printPin(painter, QPoint(start, i * 2), p.second);
+		printPin(QPoint(start, i * 2), new ExtPainter(this, p.second));
 		i++;
 	}
 	start += 2;
 }
 
-void ntsDraw::CircuitWidget::printComponent(QPainter &painter, size_t &start,
-	nts::IComponent *component)
+void ntsDraw::CircuitWidget::printComponent(size_t &start, nts::IComponent *component)
 {
 	size_t size = component->getNbPin();
 	QPoint pos(start, 0);
 
 	for (size_t i = 0; i < size; i++) {
-		printPin(painter, pos, component->getPin(i));
+		printPin(pos, new PinPainter(this, component->getPin(i)));
 		if (i < size / 2 - 1)
 			pos.ry()++;
 		else if (i == size / 2 - 1)
@@ -101,17 +96,17 @@ void ntsDraw::CircuitWidget::printComponent(QPainter &painter, size_t &start,
 	start += 3;
 }
 
-void ntsDraw::CircuitWidget::printComponents(QPainter &painter, size_t &start)
+void ntsDraw::CircuitWidget::printComponents(size_t &start)
 {
 	auto pin = _circuit.getComponent();
 
 	for (auto p : pin) {
-		printComponent(painter, start, p.second);
+		printComponent(start, p.second);
 	}
 }
 
 void ntsDraw::CircuitWidget::simulate()
 {
-	std::cout << "JE SUIS OSKOUR" << std::endl;
 	_circuit.simulate();
+	repaint();
 }

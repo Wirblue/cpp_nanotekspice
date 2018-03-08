@@ -173,7 +173,7 @@ bool nts::Circuit::checkOutput()
 
 	for (auto a : _output) {
 		if (a.second->getLink() == nullptr)
-			status = false;
+			throw nts::NtsException("Invalid Input or Output", a.second->getName());
 	}
 	return status;
 }
@@ -186,7 +186,7 @@ bool nts::Circuit::checkInput()
 		if (!a.second
 			|| a.second->getLink() == nullptr
 			|| a.second->getStatus() == nts::UNDEFINED)
-			status = false;
+			throw nts::NtsException("Invalid Input or Output", a.second->getName());
 	}
 	return status;
 }

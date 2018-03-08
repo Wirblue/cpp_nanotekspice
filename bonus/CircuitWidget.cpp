@@ -107,15 +107,15 @@ void ntsDraw::CircuitWidget::printComponent(size_t &start, nts::IComponent *comp
 	for (size_t i = 0; i < size; i++) {
 		printPin(pos,
 			new PinPainter(this, component->getPin(i)));
-		if (i < size / 2 - 1)
+		//if (i < size / 2 - 1)
 			pos.ry()++;
-		else if (i == size / 2 - 1)
+		/*else if (i == size / 2 - 1)
 			pos.rx()++;
 		else
-			pos.ry()--;
+			pos.ry()--;*/
 
 	}
-	start += 1 + (size > 1 ? 1 : 0) + OFFSET;
+	start += 1 /*+ (size > 1 ? 1 : 0)*/ + OFFSET;
 }
 
 void ntsDraw::CircuitWidget::printComponents(size_t &start)

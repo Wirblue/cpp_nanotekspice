@@ -1,9 +1,7 @@
 cmake_minimum_required(VERSION 3.8)
 project(cpp_nanotekspice)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -std=c++17")
-
-include_directories(include)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -W -Wall -Wextra -std=c++17")
 
 set(SOURCE_FILES
         src/Circuit.cpp
@@ -95,6 +93,12 @@ add_executable(nanotekspice-bonus WIN32
         bonus/painter/PinPainter.cpp
         bonus/painter/PinPainter.hpp
         bonus/NtsWindow.cpp
-        bonus/NtsWindow.hpp bonus/painter/InputPainter.cpp bonus/painter/InputPainter.hpp bonus/painter/ExtPainter.cpp bonus/painter/ExtPainter.hpp bonus/painter/LinkPainter.cpp bonus/painter/LinkPainter.hpp)
+        bonus/NtsWindow.hpp
+        bonus/painter/InputPainter.cpp
+        bonus/painter/InputPainter.hpp
+        bonus/painter/ExtPainter.cpp
+        bonus/painter/ExtPainter.hpp
+        bonus/painter/LinkPainter.cpp
+        bonus/painter/LinkPainter.hpp)
 
 target_link_libraries(nanotekspice-bonus Qt5::Widgets)
